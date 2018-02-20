@@ -24,7 +24,7 @@
                 <ul class="navbar-nav mr-auto">
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Usuarios</a>
+                        <a class="nav-link" href="/Administrador/Usuarios.aspx">Usuarios</a>
                     </li>
 
                     <li class="nav-item active">
@@ -32,15 +32,15 @@
                     </li>
               
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Universidades</a>
+                        <a class="nav-link" href="/Administrador/Universidades.aspx">Universidades</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Carreras</a>
+                        <a class="nav-link" href="/Administrador/Carreras.aspx">Carreras</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Niveles de estudio</a>
+                        <a class="nav-link" href="/Administrador/Niveles.aspx">Niveles de estudio</a>
                     </li>
 
                     <li class="nav-item d-block d-lg-none">
@@ -71,6 +71,9 @@
         </nav>
 
         <section class="container">
+
+            <asp:SqlDataSource ID="sqlProgramasBecas" runat="server"></asp:SqlDataSource>
+            <asp:GridView CssClass="table table-dark table-hover" ID="tablaProgramasBecas" runat="server" AllowPaging="True" DataSourceID="sqlProgramasBecas" PageSize="10"></asp:GridView>
 
         </section>
 
