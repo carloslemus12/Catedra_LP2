@@ -70,10 +70,34 @@
             </div>
         </nav>
 
+        <input id="txtCodigoModificarBeca" type="hidden" value="" runat="server" />
+
+        <asp:SqlDataSource ID="sqlProgramasBecas" runat="server" ConnectionString="<%$ ConnectionStrings:OdioTodoConnectionString %>" SelectCommand="SELECT * FROM (
+            SELECT ROW_NUMBER() OVER(ORDER BY codigo) AS NUMBER,
+                codigo, nombre, descripcion FROM Programa_Becas
+            ) AS TBL
+WHERE NUMBER BETWEEN ((@index - 1) * 6 + 1) AND (@index * 6)
+ORDER BY TBL.codigo" DeleteCommand="DELETE FROM Programa_Becas WHERE codigo = @codigo" InsertCommand="INSERT INTO Programa_Becas(codigo, nombre, descripcion) VALUES (@codigo,@nombre,@descripcion)">
+            <DeleteParameters>
+                <asp:Parameter Name="codigo" />
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="codigo" />
+                <asp:Parameter Name="nombre" />
+                <asp:Parameter Name="descripcion" />
+            </InsertParameters>
+            <SelectParameters>
+                <asp:Parameter DbType="Int32" Name="index" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+
+        <asp:SqlDataSource ID="sqlProgramasBecasCantidad" runat="server" ConnectionString="<%$ ConnectionStrings:OdioTodoConnectionString %>" SelectCommand="SELECT (count(*) / 6) + CEILING(count(*) % 6) as indice FROM Programa_Becas"></asp:SqlDataSource>
+
+
         <section class="container">
 
-            <asp:SqlDataSource ID="sqlProgramasBecas" runat="server"></asp:SqlDataSource>
-            <asp:GridView CssClass="table table-dark table-hover" ID="tablaProgramasBecas" runat="server" AllowPaging="True" DataSourceID="sqlProgramasBecas" PageSize="10"></asp:GridView>
+            <div id="divErrorCarga" runat="server"></div>
+            <div id="divCardDeckProgramas" class="card-columns mt-3" runat="server"></div>
 
         </section>
 
@@ -91,7 +115,6 @@
                     </div>
 
                     <div class="modal-body">
-                    
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -115,26 +138,35 @@
                             <label for="txtNuevaDescripcionProgrma">Decripcion del programa</label>
                             <textarea class="form-control" id="txtNuevaDescripcionProgrma" runat="server" rows="3"></textarea>
                         </div>
-
                     </div>
 
                     <div class="modal-footer">
-                        <asp:Button ID="btnGuardarPrograma" runat="server" ValidationGroup="nuevoPrograma" CssClass="btn btn-success" Text="Guardar programa" />
+                        <asp:Button ID="btnGuardarPrograma" runat="server" ValidationGroup="nuevoPrograma" CssClass="btn btn-success" Text="Guardar programa" OnClick="btnGuardarPrograma_Click" />
                     </div>
                 </div>
             </div>
         </div>
 
-    </form>
-
-    <!-- Pie de la pagina web -->
-    <div class="container-fluid m-0 p-0 fixed-bottom">
-        <button type="button" class="btn btn-info ml-2 mb-2" data-toggle="modal" data-target="#modalNuevoPrograma">Nueva programa de becas</button>
+        <!-- Pie de la pagina web -->
+        <div class="container-fluid m-0 p-0" id="divFooter" runat="server">
+            
+            <div class="container-fluid  mb-2">
         
-        <footer class="bg-danger text-white text-center py-2">
-            <span class="font-weight-bold">Universidad Don Bosco<small class="font-weight-normal ml-1"> PILET 2018 </small></span>
-        </footer>
-    </div>
+                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalNuevoPrograma">Nueva programa de becas</button>
+
+                <div id="divOpcionesPaginacion" runat="server" class="btn-group" role="group" aria-label="Basic example">
+                    <a id="btnAtrasPaginacion" runat="server" class="btn btn-secondary">Atras</a>
+                    <a id="btnSiguientePaginacion" runat="server" class="btn btn-secondary">Siguiente</a>
+                </div>
+                        
+            </div>
+        
+            <footer class="bg-danger text-white text-center py-2">
+                <span class="font-weight-bold">Universidad Don Bosco<small class="font-weight-normal ml-1"> PILET 2018 </small></span>
+            </footer>
+        </div>
+
+    </form>
 
     <script src="../js/jquery-3.2.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
