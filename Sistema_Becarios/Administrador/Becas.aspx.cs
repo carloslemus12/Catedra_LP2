@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -84,12 +85,19 @@ public partial class Administrador : System.Web.UI.Page
 
                 divCardBody.Controls.Add(descripcion);
 
+                UpdatePanel up = new UpdatePanel();
+                
+
                 // Botones de accion
                 Button btnModificar = new Button();
                 btnModificar.CssClass = "btn btn-success";
                 btnModificar.Text = "Modificar";
                 btnModificar.Attributes["onclick"] = "$('#txtCodigoModificarBeca').val('" + HttpUtility.HtmlDecode(registro["codigo"].ToString()) + "');";
                 btnModificar.Click += btnModificar_Click;
+                btnModificar.Attributes["data-toggle"] = "modal";
+                btnModificar.Attributes["data-target"] = "#modalModificarBecas";
+
+                up.ContentTemplateContainer.Controls.Add(btnModificar);
 
                 Button btnEliminar = new Button();
                 btnEliminar.Text = "Eliminar";
@@ -97,7 +105,7 @@ public partial class Administrador : System.Web.UI.Page
                 btnEliminar.Attributes["onclick"] = "$('#txtCodigoModificarBeca').val('" + HttpUtility.HtmlDecode(registro["codigo"].ToString()) + "');";
                 btnEliminar.Click += btnEliminar_Click;
 
-                divCardFooter.Controls.Add(btnModificar);
+                divCardFooter.Controls.Add(up);
                 divCardFooter.Controls.Add(btnEliminar);
 
                 // Añadimos los diferentes div
@@ -124,31 +132,129 @@ public partial class Administrador : System.Web.UI.Page
 
     protected void btnModificar_Click(object sender, EventArgs e)
     {
-        Response.Write(this.txtCodigoModificarBeca.Value);
+        SqlConnection sql = new SqlConnection(this.sqlProgramasBecas.ConnectionString);
+
+        try
+        {
+            SqlCommand comando = new SqlCommand("SELECT nombre, descripcion FROM Programa_Becas WHERE codigo = @codigo", sql);
+            comando.Parameters.Add("codigo", SqlDbType.Char);
+            comando.Parameters["codigo"].Value = this.txtCodigoModificarBeca.Value;
+            sql.Open();
+
+            SqlDataReader datos = comando.ExecuteReader();
+
+            while (datos.Read())
+            {
+                scrControl.RegisterDataItem(this.txtModificarCodigo, this.txtCodigoModificarBeca.Value.Trim());
+                scrControl.RegisterDataItem(this.txtModificarNombrePrograma, datos["nombre"].ToString().Trim());
+                scrControl.RegisterDataItem(this.txtModificarDescripcionProgrma, datos["descripcion"].ToString().Trim());
+            }
+        }
+        catch (Exception)
+        {
+
+        }
+        finally
+        {
+            sql.Close();
+        }
     }
 
     protected void btnEliminar_Click(object sender, EventArgs e)
     {
-        string codigo = this.txtCodigoModificarBeca.Value;
-        this.sqlProgramasBecas.DeleteParameters["codigo"].DefaultValue = codigo;
-        this.sqlProgramasBecas.Delete();
+        try
+        {
+            // Eliminamos el codigo
+            string codigo = this.txtCodigoModificarBeca.Value;
+            this.sqlProgramasBecas.DeleteParameters["codigo"].DefaultValue = codigo;
+            this.sqlProgramasBecas.Delete();
 
-        Response.Redirect(Request.RawUrl);
+            Response.Redirect(Request.RawUrl);
+        }
+        catch (Exception)
+        {
+            // En caso de error
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert", "alert('Error: no se ha podido eliminar el programa');", true);
+        }
     }
 
     protected void btnGuardarPrograma_Click(object sender, EventArgs e)
     {
+        try {
+            string codigo = this.txtNuevoCodigo.Value.Trim();
+            string nombre = this.txtNuevoNombrePrograma.Value.ToString();
+            string descripcion = this.txtNuevaDescripcionProgrma.Value.ToString();
 
-        string codigo = this.txtNuevoCodigo.Value.Trim();
-        string nombre = this.txtNuevoNombrePrograma.Value.ToString();
-        string descripcion = this.txtNuevaDescripcionProgrma.Value.ToString();
+            this.sqlProgramasBecas.InsertParameters["codigo"].DefaultValue = codigo;
+            this.sqlProgramasBecas.InsertParameters["nombre"].DefaultValue = nombre;
+            this.sqlProgramasBecas.InsertParameters["descripcion"].DefaultValue = descripcion;
 
-        this.sqlProgramasBecas.InsertParameters["codigo"].DefaultValue = codigo;
-        this.sqlProgramasBecas.InsertParameters["nombre"].DefaultValue = nombre;
-        this.sqlProgramasBecas.InsertParameters["descripcion"].DefaultValue = descripcion;
+            this.txtNuevoCodigo.Value = "";
+            this.txtNuevoNombrePrograma.Value = "";
+            this.txtNuevaDescripcionProgrma.Value = "";
 
-        this.sqlProgramasBecas.Insert();
+            this.sqlProgramasBecas.Insert();
 
-        Response.Redirect(Request.RawUrl);
+            Response.Redirect(Request.RawUrl);
+        }
+        catch (Exception)
+        {
+            // En caso de error
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert", "alert('Error: no se ha podido guardar el programa');", true);
+        }
+    }
+
+    protected void btnModificarBeca_Click(object sender, EventArgs e)
+    {
+        // Obtenemos la informacion actual
+        string codigoActual = this.txtCodigoModificarBeca.Value.Trim();
+        string codigo = this.txtModificarCodigo.Value.Trim();
+        string nombre = this.txtModificarNombrePrograma.Value.Trim();
+        string descripcion = this.txtModificarDescripcionProgrma.Value.Trim();
+
+        bool mismoCodigo = codigo.Equals(codigoActual);
+
+        // Creamos la consulta
+        string set = "SET nombre = @nombre, descripcion = @descripcion" + ((mismoCodigo) ? "" : ", codigo = @nuevo_codigo");
+
+        string consulta = "UPDATE Programa_Becas " + set + " WHERE codigo = @codigo";
+
+        SqlConnection sql = new SqlConnection(this.sqlProgramasBecas.ConnectionString);
+
+        try
+        {
+            SqlCommand comando = new SqlCommand(consulta, sql);
+
+            if (!mismoCodigo)
+            {
+                comando.Parameters.Add("nuevo_codigo", SqlDbType.Char);
+                comando.Parameters["nuevo_codigo"].Value = codigo;
+            }
+
+            comando.Parameters.Add("nombre", SqlDbType.VarChar);
+            comando.Parameters.Add("descripcion", SqlDbType.VarChar);
+            comando.Parameters.Add("codigo", SqlDbType.Char);
+
+            comando.Parameters["nombre"].Value = nombre;
+            comando.Parameters["descripcion"].Value = descripcion;
+            comando.Parameters["codigo"].Value = codigoActual;
+
+            sql.Open();
+
+            if (comando.ExecuteNonQuery() <= 0)
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert", "alert('Error: no se ha podido modificar el programa');", true);
+
+            sql.Close();
+
+            Response.Redirect(Request.RawUrl);
+        }
+        catch (Exception)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert", "alert('Error: no se ha podido modificar el programa');", true);
+        }
+        finally
+        {
+            sql.Close();
+        }
     }
 }

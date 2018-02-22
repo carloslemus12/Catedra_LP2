@@ -9,7 +9,24 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    
+
+        <asp:ScriptManager ID="scrControl" runat="server" />
+        <script>
+            Sys.WebForms.PageRequestManager.getInstance().add_pageLoading(PageLoadingHandler);
+            function PageLoadingHandler(sender, args) {
+                var dato = args.get_dataItems();
+
+                if (dato['txtModificarNombrePrograma'] !== null)
+                    $('#txtModificarNombrePrograma').val(dato['txtModificarNombrePrograma']);
+
+                if (dato['txtModificarDescripcionProgrma'] !== null)
+                    $('#txtModificarDescripcionProgrma').val(dato['txtModificarDescripcionProgrma']);
+
+                if (dato['txtModificarCodigo'] !== null)
+                    $('#txtModificarCodigo').val(dato['txtModificarCodigo']);
+                    
+            }
+        </script>
         <!-- Menu de navegacion -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
             <span class="navbar-brand">
@@ -147,6 +164,50 @@ ORDER BY TBL.codigo" DeleteCommand="DELETE FROM Programa_Becas WHERE codigo = @c
             </div>
         </div>
 
+        <div class="modal fade" id="modalModificarBecas" tabindex="-1" role="dialog" aria-labelledby="modalModificarBecas" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title">Modificar programa de beca</h5>
+                
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button id="btnCambiarTxtModificarCodigo" type="button" class="input-group-text bg-danger text-white">&#128273;</button>
+                                </div>
+                                
+                                <input type="text" maxlength="4" class="form-control" id="txtModificarCodigo" placeholder="Codigo" runat="server" readonly/>
+                            </div>
+
+                            <asp:RequiredFieldValidator ControlToValidate="txtModificarCodigo" ValidationGroup="modificarPrograma" ErrorMessage="El codigo del programa es obligatorio" runat="server" Display="Dynamic" CssClass="blockquote-footer text-danger" />
+                            <asp:RegularExpressionValidator ControlToValidate="txtModificarCodigo" ValidationGroup="modificarPrograma" ErrorMessage="El codigo no es permitido" runat="server" Display="Dynamic" CssClass="blockquote-footer text-danger" ValidationExpression="^[A-Z]{4}$"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtModificarNombrePrograma">Nombre del programa</label>
+                            <input class="form-control" id="txtModificarNombrePrograma" runat="server" placeholder="Nombre" />
+                            <asp:RequiredFieldValidator ControlToValidate="txtModificarNombrePrograma" ValidationGroup="modificarPrograma" ErrorMessage="El nombre del programa es obligatorio" runat="server" Display="Dynamic" CssClass="blockquote-footer text-danger" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtModificarDescripcionProgrma">Decripcion del programa</label>
+                            <textarea class="form-control" id="txtModificarDescripcionProgrma" runat="server" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <asp:Button ID="btnModificarBeca" runat="server" ValidationGroup="modificarPrograma" CssClass="btn btn-success" Text="Modificar programa" OnClick="btnModificarBeca_Click" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Pie de la pagina web -->
         <div class="container-fluid m-0 p-0" id="divFooter" runat="server">
             
@@ -173,6 +234,18 @@ ORDER BY TBL.codigo" DeleteCommand="DELETE FROM Programa_Becas WHERE codigo = @c
     <script>
         // Funcion para obtener solo los primeros 4 numeros
         function ObtenerCodigoPorNombre(txtNombre) {
+            txtNombre = txtNombre.trim();
+
+            var nuevo = "";
+            for (var i = 0; i < txtNombre.length; i++) {
+                var simbolo = txtNombre.charAt(i);
+
+                if (simbolo != " ")
+                    nuevo += simbolo
+            }
+
+            txtNombre = nuevo;
+
             var tamaño = txtNombre.length;
 
             var limite = (tamaño >= 4) ? 4 : tamaño;
@@ -211,7 +284,30 @@ ORDER BY TBL.codigo" DeleteCommand="DELETE FROM Programa_Becas WHERE codigo = @c
                     $txtNuevoCodigo.val(ObtenerCodigoPorNombre($(this).val())).change();
                 }
             });
+            // //////////////////////////////////////////////////////7
 
+            var $txtModificarCodigo = $("#txtModificarCodigo");
+            var $txtModificarNombre = $('#txtModificarNombrePrograma');
+
+            $("#btnCambiarTxtModificarCodigo").click(function () {
+                var desactivado = $txtModificarCodigo.prop('readonly');
+
+                if (desactivado) {
+                    $txtModificarCodigo.prop('readonly', false);
+                    $txtModificarCodigo.val("").change();
+                } else {
+                    $txtModificarCodigo.prop('readonly', true);
+                    $txtModificarCodigo.val(ObtenerCodigoPorNombre($txtModificarNombre.val())).change();
+                }
+            });
+
+            $txtModificarNombre.on('input', function (e) {
+                var desactivado = $txtModificarCodigo.prop('readonly');
+
+                if (desactivado) {
+                    $txtModificarCodigo.val(ObtenerCodigoPorNombre($(this).val())).change();
+                }
+            });
         });
     </script>
 </body>
