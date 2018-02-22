@@ -9,6 +9,22 @@
 </head>
 <body>
     <form id="form1" runat="server">
+
+        <input type="hidden" id="txtIndice" runat="server" />
+
+        <asp:SqlDataSource ID="sqlUniversidades" runat="server" ConnectionString="<%$ ConnectionStrings:OdioTodoConnectionString %>" DeleteCommand="DELETE FROM [Universidades] WHERE [indice] = @indice" InsertCommand="INSERT INTO [Universidades] ([nombre]) VALUES (@nombre)" SelectCommand="SELECT [indice], [nombre] FROM [Universidades]" UpdateCommand="UPDATE [Universidades] SET [nombre] = @nombre WHERE [indice] = @indice">
+            <DeleteParameters>
+                <asp:Parameter Name="indice" Type="Int32" />
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="nombre" Type="String" />
+            </InsertParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="nombre" Type="String" />
+                <asp:Parameter Name="indice" Type="Int32" />
+            </UpdateParameters>
+        </asp:SqlDataSource>
+
         <!-- Menu de navegacion -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
             <span class="navbar-brand">
@@ -91,11 +107,65 @@
                     </div>
 
                     <div class="modal-footer">
-                        <asp:Button ID="btnNuevaUniversidad" runat="server" CssClass="btn btn-success" Text="Guardar universidad" ValidationGroup="nuevaUniversidad"/>
+                        <asp:Button ID="btnNuevaUniversidad" runat="server" CssClass="btn btn-success" Text="Guardar universidad" ValidationGroup="nuevaUniversidad" OnClick="btnNuevaUniversidad_Click"/>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="modalModificarUniversidad" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title">Modificar universidad</h5>
+                        
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                    
+                        <div class="form-group">
+                            <label for="txtNombreModificarUniversidad">Nombre universidad:</label>
+                            <asp:TextBox CssClass="form-control" ValidationGroup="modificarUniversidad" ID="txtNombreModificarUniversidad" runat="server" placeholder="Universidad" />
+                            <asp:RequiredFieldValidator ControlToValidate="txtNombreModificarUniversidad" ValidationGroup="modificarUniversidad" runat="server" ErrorMessage="El nombre de la universidad es obligatoria" CssClass="text-danger blockquote-footer text-danger" />
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <asp:Button ID="btnModificarUniversidad" runat="server" CssClass="btn btn-success" Text="Modificar universidad" ValidationGroup="modificarUniversidad" OnClick="btnModificarUniversidad_Click"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <asp:ScriptManager ID="scrControl" runat="server"></asp:ScriptManager>
+        <script>
+            Sys.WebForms.PageRequestManager.getInstance().add_pageLoading(PageLoadingHandler);
+            function PageLoadingHandler(sender, args) {
+                var datos = args.get_dataItems();
+
+                if (datos['txtIndice'] !== null)
+                    $('#txtIndice').val(datos['txtIndice']);
+
+                if (datos['txtNombreModificarUniversidad'] !== null)
+                    $('#txtNombreModificarUniversidad').val(datos['txtNombreModificarUniversidad']);
+            }
+        </script>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>
+                <asp:GridView ID="tablaUniversidad" CssClass="table table-dark table-hover mt-3 text-center" PageSize="5" runat="server" AutoGenerateColumns="False" DataKeyNames="indice" DataSourceID="sqlUniversidades" AllowPaging="True" OnPreRender="tablaUniversidad_PreRender" OnRowCreated="tablaUniversidad_RowCreated" OnSelectedIndexChanged="tablaUniversidad_SelectedIndexChanged">
+                    <Columns>
+                        <asp:BoundField DataField="indice" HeaderText="indice" InsertVisible="False" ReadOnly="True" SortExpression="indice" Visible="False" />
+                        <asp:BoundField DataField="nombre" HeaderText="Universidad" SortExpression="nombre" />
+                        <asp:CommandField ButtonType="Image" SelectImageUrl="~/img/update.png" ShowSelectButton="True" />
+                        <asp:CommandField ButtonType="Image" DeleteImageUrl="~/img/delete.png" ShowDeleteButton="True" />
+                    </Columns>
+                </asp:GridView>
+            </ContentTemplate>
+        </asp:UpdatePanel>
 
     </form>
 
