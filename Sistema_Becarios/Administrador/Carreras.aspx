@@ -9,6 +9,21 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:SqlDataSource ID="sqlCarreras" runat="server" ConnectionString="<%$ ConnectionStrings:OdioTodoConnectionString %>" DeleteCommand="DELETE FROM [Carreras] WHERE [indice] = @indice" InsertCommand="INSERT INTO [Carreras] ([nombre]) VALUES (@nombre)" SelectCommand="SELECT [indice], [nombre] FROM [Carreras]" UpdateCommand="UPDATE [Carreras] SET [nombre] = @nombre WHERE [indice] = @indice">
+            <DeleteParameters>
+                <asp:Parameter Name="indice" Type="Int32" />
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="nombre" Type="String" />
+            </InsertParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="nombre" Type="String" />
+                <asp:Parameter Name="indice" Type="Int32" />
+            </UpdateParameters>
+        </asp:SqlDataSource>
+
+        <input id="txtIndiceCarrera" runat="server" type="hidden" />
+
         <!-- Menu de navegacion -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
             <span class="navbar-brand">
@@ -69,6 +84,32 @@
             </div>
         </nav>
 
+        <asp:ScriptManager ID="scrControl" runat="server"></asp:ScriptManager>
+        <script>
+            Sys.WebForms.PageRequestManager.getInstance().add_pageLoading(PageLoadingHandler);
+            function PageLoadingHandler(sender, args) {
+                var datos = args.get_dataItems();
+
+                if (datos['txtIndiceCarrera'] !== null)
+                    $('#txtIndiceCarrera').val(datos['txtIndiceCarrera']);
+
+                if (datos['txtModificarCarrera'] !== null)
+                    $('#txtModificarCarrera').val(datos['txtModificarCarrera']);
+            }
+        </script>
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+                <asp:GridView ID="tablaCarrera" PageSize="5" runat="server" CssClass="table table-dark table-hover mt-3 text-center" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="indice" DataSourceID="sqlCarreras" OnPreRender="tablaCarrera_PreRender" OnRowCreated="tablaCarrera_RowCreated" OnSelectedIndexChanged="tablaCarrera_SelectedIndexChanged">
+                    <Columns>
+                        <asp:BoundField DataField="indice" HeaderText="indice" InsertVisible="False" ReadOnly="True" SortExpression="indice" Visible="False" />
+                        <asp:BoundField DataField="nombre" HeaderText="Carrera" SortExpression="nombre" />
+                        <asp:CommandField ButtonType="Image" SelectImageUrl="~/img/update.png" ShowSelectButton="True" />
+                        <asp:CommandField ButtonType="Image" DeleteImageUrl="~/img/delete.png" ShowDeleteButton="True" />
+                    </Columns>
+                </asp:GridView>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+
         <div class="modal fade" id="modalNuevaCarreras" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -91,7 +132,35 @@
                     </div>
 
                     <div class="modal-footer">
-                        <asp:Button ID="btnNuevaCarrera" runat="server" CssClass="btn btn-success" Text="Guardar carrera" ValidationGroup="nuevaCarrera"/>
+                        <asp:Button ID="btnNuevaCarrera" runat="server" CssClass="btn btn-success" Text="Guardar carrera" ValidationGroup="nuevaCarrera" OnClick="btnNuevaCarrera_Click"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalModificarCarrera" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title">Modificar carrera</h5>
+                        
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                    
+                        <div class="form-group">
+                            <label for="txtModificarCarrera">Nombre carrera:</label>
+                            <asp:TextBox CssClass="form-control" ID="txtModificarCarrera" ValidationGroup="modificarCarrera" runat="server" placeholder="Carrera" />
+                            <asp:RequiredFieldValidator ControlToValidate="txtModificarCarrera" ValidationGroup="modificarCarrera" runat="server" ErrorMessage="El nombre de la carrera es obligatoria" CssClass="text-danger blockquote-footer text-danger" />
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <asp:Button ID="btnModificar" runat="server" CssClass="btn btn-success" Text="Modificar carrera" ValidationGroup="modificarCarrera" OnClick="btnModificar_Click"/>
                     </div>
                 </div>
             </div>

@@ -154,7 +154,8 @@
                     $('#txtNombreModificarUniversidad').val(datos['txtNombreModificarUniversidad']);
             }
         </script>
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+
+        <asp:UpdatePanel runat="server">
             <ContentTemplate>
                 <asp:GridView ID="tablaUniversidad" CssClass="table table-dark table-hover mt-3 text-center" PageSize="5" runat="server" AutoGenerateColumns="False" DataKeyNames="indice" DataSourceID="sqlUniversidades" AllowPaging="True" OnPreRender="tablaUniversidad_PreRender" OnRowCreated="tablaUniversidad_RowCreated" OnSelectedIndexChanged="tablaUniversidad_SelectedIndexChanged">
                     <Columns>

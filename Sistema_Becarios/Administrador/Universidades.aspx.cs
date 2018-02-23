@@ -19,6 +19,8 @@ public partial class Administrador_Universidades : System.Web.UI.Page
             var tabla = (GridView)sender;
             var cabezera = (GridViewRow)tabla.Controls[0].Controls[0];
 
+            cabezera.CssClass = "thead-light";
+
             cabezera.Cells[2].Text = "Opciones";
             cabezera.Cells[2].ColumnSpan = 2;
             cabezera.Cells.RemoveAt(3);
@@ -63,14 +65,22 @@ public partial class Administrador_Universidades : System.Web.UI.Page
 
     protected void btnModificarUniversidad_Click(object sender, EventArgs e)
     {
-        string codigo = this.txtIndice.Value.Trim();
-        string nombre = this.txtNombreModificarUniversidad.Text.Trim();
+        try
+        {
+            string codigo = this.txtIndice.Value.Trim();
+            string nombre = this.txtNombreModificarUniversidad.Text.Trim();
 
-        this.sqlUniversidades.UpdateParameters["nombre"].DefaultValue = nombre;
-        this.sqlUniversidades.UpdateParameters["indice"].DefaultValue = codigo;
+            this.sqlUniversidades.UpdateParameters["nombre"].DefaultValue = nombre;
+            this.sqlUniversidades.UpdateParameters["indice"].DefaultValue = codigo;
 
-        this.sqlUniversidades.Update();
-
-        this.tablaUniversidad.DataBind();
+            if (this.sqlUniversidades.Update() <= 0)
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert", "alert('No se ha podido modificar la universidad');", true);
+            else
+                this.tablaUniversidad.DataBind();
+        }
+        catch (Exception)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert", "alert('No se ha podido modificar la universidad');", true);
+        }
     }
 }

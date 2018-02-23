@@ -9,6 +9,20 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <input type="hidden" id="txtIndiceNivel" runat="server" />
+        <asp:SqlDataSource ID="sqlNiveles" runat="server" ConnectionString="<%$ ConnectionStrings:OdioTodoConnectionString %>" DeleteCommand="DELETE FROM [Niveles] WHERE [indice] = @indice" InsertCommand="INSERT INTO [Niveles] ([nombre]) VALUES (@nombre)" SelectCommand="SELECT [indice], [nombre] FROM [Niveles]" UpdateCommand="UPDATE [Niveles] SET [nombre] = @nombre WHERE [indice] = @indice">
+            <DeleteParameters>
+                <asp:Parameter Name="indice" Type="Int32" />
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="nombre" Type="String" />
+            </InsertParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="nombre" Type="String" />
+                <asp:Parameter Name="indice" Type="Int32" />
+            </UpdateParameters>
+        </asp:SqlDataSource>
+
         <!-- Menu de navegacion -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
             <span class="navbar-brand">
@@ -69,6 +83,33 @@
             </div>
         </nav>
 
+        <asp:ScriptManager ID="scrControl" runat="server"></asp:ScriptManager>
+        <script>
+            Sys.WebForms.PageRequestManager.getInstance().add_pageLoading(PageLoadingHandler);
+            function PageLoadingHandler(sender, args) {
+                var datos = args.get_dataItems();
+
+                if (datos['txtIndiceNivel'] !== null)
+                    $('#txtIndiceNivel').val(datos['txtIndiceNivel']);
+
+                if (datos['txtNombreModificarNivel'] !== null)
+                    $('#txtNombreModificarNivel').val(datos['txtNombreModificarNivel']);
+            }
+        </script>
+
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+                <asp:GridView ID="tablaNiveles" CssClass="mt-3 table table-dark table-hover text-center" runat="server" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="indice" DataSourceID="sqlNiveles" OnPreRender="tablaNiveles_PreRender" OnRowCreated="tablaNiveles_RowCreated" OnSelectedIndexChanged="tablaNiveles_SelectedIndexChanged">
+                    <Columns>
+                        <asp:BoundField DataField="indice" HeaderText="indice" InsertVisible="False" ReadOnly="True" SortExpression="indice" Visible="False" />
+                        <asp:BoundField DataField="nombre" HeaderText="Carrera" SortExpression="nombre" />
+                        <asp:CommandField ButtonType="Image" HeaderText="Opciones" SelectImageUrl="~/img/update.png" ShowSelectButton="True" />
+                        <asp:CommandField ButtonType="Image" DeleteImageUrl="~/img/delete.png" ShowDeleteButton="True" />
+                    </Columns>
+                </asp:GridView>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+
         <div class="modal fade" id="modalNuevoNivel" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -91,7 +132,35 @@
                     </div>
 
                     <div class="modal-footer">
-                        <asp:Button ID="btnNuevaCarrera" runat="server" CssClass="btn btn-success" Text="Guardar nivel" ValidationGroup="nuevoNivel"/>
+                        <asp:Button ID="btnNuevaCarrera" runat="server" CssClass="btn btn-success" Text="Guardar nivel" ValidationGroup="nuevoNivel" OnClick="btnNuevaCarrera_Click"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalModificarNivel" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title">Modificar nivel estudiantil</h5>
+                        
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                    
+                        <div class="form-group">
+                            <label for="txtNombreModificarNivel">Nivel estudiantil:</label>
+                            <asp:TextBox CssClass="form-control" ID="txtNombreModificarNivel" ValidationGroup="modificarNivel" runat="server" placeholder="Nivel" />
+                            <asp:RequiredFieldValidator ControlToValidate="txtNombreModificarNivel" ValidationGroup="modificarNivel" runat="server" ErrorMessage="El nombre del nivel es obligatoria" CssClass="text-danger blockquote-footer text-danger" />
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <asp:Button ID="btnModificarNivel" runat="server" CssClass="btn btn-success" Text="Modificar nivel" ValidationGroup="modificarNivel" OnClick="btnModificarNivel_Click"/>
                     </div>
                 </div>
             </div>
