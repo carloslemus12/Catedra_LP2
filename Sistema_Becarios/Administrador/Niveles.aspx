@@ -6,17 +6,21 @@
 <head runat="server">
     <title>Gestion niveles de estudio</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/estilos-app.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
         <input type="hidden" id="txtIndiceNivel" runat="server" />
-        <asp:SqlDataSource ID="sqlNiveles" runat="server" ConnectionString="<%$ ConnectionStrings:OdioTodoConnectionString %>" DeleteCommand="DELETE FROM [Niveles] WHERE [indice] = @indice" InsertCommand="INSERT INTO [Niveles] ([nombre]) VALUES (@nombre)" SelectCommand="SELECT [indice], [nombre] FROM [Niveles]" UpdateCommand="UPDATE [Niveles] SET [nombre] = @nombre WHERE [indice] = @indice">
+        <asp:SqlDataSource ID="sqlNiveles" runat="server" ConnectionString="<%$ ConnectionStrings:OdioTodoConnectionString %>" DeleteCommand="DELETE FROM [Niveles] WHERE [indice] = @indice" InsertCommand="INSERT INTO [Niveles] ([nombre]) VALUES (@nombre)" SelectCommand="SELECT [indice], [nombre] FROM [Niveles] WHERE ([nombre] LIKE '%' + @nombre + '%')" UpdateCommand="UPDATE [Niveles] SET [nombre] = @nombre WHERE [indice] = @indice">
             <DeleteParameters>
                 <asp:Parameter Name="indice" Type="Int32" />
             </DeleteParameters>
             <InsertParameters>
                 <asp:Parameter Name="nombre" Type="String" />
             </InsertParameters>
+            <SelectParameters>
+                <asp:ControlParameter ControlID="txtNombreFiltro" DefaultValue="%" Name="nombre" PropertyName="Text" Type="String" />
+            </SelectParameters>
             <UpdateParameters>
                 <asp:Parameter Name="nombre" Type="String" />
                 <asp:Parameter Name="indice" Type="Int32" />
@@ -82,6 +86,17 @@
             
             </div>
         </nav>
+
+        <div class="container-fluid bg-dark d-flex justify-content-center">
+            <div class="form-inline my-2">
+
+                <div class="form-group">
+                    <asp:TextBox CssClass="form-control my-0" ID="txtNombreFiltro" Text="" runat="server" />
+                </div>
+
+                <button type="submit" class="btn btn-danger ml-2 my-0" id="btnFiltrar" runat="server">Filtrar</button>
+            </div>
+        </div>
 
         <asp:ScriptManager ID="scrControl" runat="server"></asp:ScriptManager>
         <script>

@@ -6,19 +6,23 @@
 <head runat="server">
     <title>Gestion Universidades</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/estilos-app.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
 
         <input type="hidden" id="txtIndice" runat="server" />
 
-        <asp:SqlDataSource ID="sqlUniversidades" runat="server" ConnectionString="<%$ ConnectionStrings:OdioTodoConnectionString %>" DeleteCommand="DELETE FROM [Universidades] WHERE [indice] = @indice" InsertCommand="INSERT INTO [Universidades] ([nombre]) VALUES (@nombre)" SelectCommand="SELECT [indice], [nombre] FROM [Universidades]" UpdateCommand="UPDATE [Universidades] SET [nombre] = @nombre WHERE [indice] = @indice">
+        <asp:SqlDataSource ID="sqlUniversidades" runat="server" ConnectionString="<%$ ConnectionStrings:OdioTodoConnectionString %>" DeleteCommand="DELETE FROM [Universidades] WHERE [indice] = @indice" InsertCommand="INSERT INTO [Universidades] ([nombre]) VALUES (@nombre)" SelectCommand="SELECT indice, nombre FROM Universidades WHERE (nombre LIKE '%' + @nombre + '%')" UpdateCommand="UPDATE [Universidades] SET [nombre] = @nombre WHERE [indice] = @indice">
             <DeleteParameters>
                 <asp:Parameter Name="indice" Type="Int32" />
             </DeleteParameters>
             <InsertParameters>
                 <asp:Parameter Name="nombre" Type="String" />
             </InsertParameters>
+            <SelectParameters>
+                <asp:ControlParameter ControlID="txtNombreFiltro" DbType="String" DefaultValue="%" Name="nombre" PropertyName="Text" />
+            </SelectParameters>
             <UpdateParameters>
                 <asp:Parameter Name="nombre" Type="String" />
                 <asp:Parameter Name="indice" Type="Int32" />
@@ -84,6 +88,17 @@
             
             </div>
         </nav>
+
+        <div class="container-fluid bg-dark d-flex justify-content-center">
+            <div class="form-inline my-2">
+
+                <div class="form-group">
+                    <asp:TextBox CssClass="form-control my-0" ID="txtNombreFiltro" Text="" runat="server" />
+                </div>
+
+                <button type="submit" class="btn btn-danger ml-2 my-0" id="btnFiltrar" runat="server">Filtrar</button>
+            </div>
+        </div>
 
         <div class="modal fade" id="modalNuevaUniversidad" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -168,16 +183,16 @@
             </ContentTemplate>
         </asp:UpdatePanel>
 
-    </form>
-
-    <!-- Pie de la pagina web -->
-    <div class="container-fluid m-0 p-0 fixed-bottom">
-        <button type="button" class="btn btn-info ml-2 mb-2" data-toggle="modal" data-target="#modalNuevaUniversidad">Nueva universidad</button>
+        <!-- Pie de la pagina web -->
+        <div id="divFooter" runat="server" class="container-fluid m-0 p-0 fixed-bottom">
+            <button type="button" class="btn btn-info ml-2 mb-2" data-toggle="modal" data-target="#modalNuevaUniversidad">Nueva universidad</button>
         
-        <footer class="bg-danger text-white text-center py-2">
-            <span class="font-weight-bold">Universidad Don Bosco<small class="font-weight-normal ml-1"> PILET 2018 </small></span>
-        </footer>
-    </div>
+            <footer class="bg-danger text-white text-center py-2">
+                <span class="font-weight-bold">Universidad Don Bosco<small class="font-weight-normal ml-1"> PILET 2018 </small></span>
+            </footer>
+        </div>
+
+    </form>
 
     <script src="../js/jquery-3.2.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>

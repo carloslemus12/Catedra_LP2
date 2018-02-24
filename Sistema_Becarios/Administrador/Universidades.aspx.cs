@@ -9,7 +9,7 @@ public partial class Administrador_Universidades : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        
     }
 
     protected void tablaUniversidad_PreRender(object sender, EventArgs e)
@@ -18,8 +18,6 @@ public partial class Administrador_Universidades : System.Web.UI.Page
         {
             var tabla = (GridView)sender;
             var cabezera = (GridViewRow)tabla.Controls[0].Controls[0];
-
-            cabezera.CssClass = "thead-light";
 
             cabezera.Cells[2].Text = "Opciones";
             cabezera.Cells[2].ColumnSpan = 2;

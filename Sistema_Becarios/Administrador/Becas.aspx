@@ -6,6 +6,7 @@
 <head runat="server">
     <title>Gestion Becarios</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/estilos-app.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -87,6 +88,21 @@
             </div>
         </nav>
 
+        <div class="container-fluid bg-dark d-flex justify-content-center">
+            <div class="form-inline my-2">
+
+                <div class="form-group">
+                    <asp:TextBox CssClass="form-control my-0" ID="txtCodigoFiltro" Text="" placeholder="Codigo" runat="server" />
+                </div>
+
+                <div class="form-group">
+                    <asp:TextBox CssClass="form-control my-0 ml-2" ID="txtNombreFiltro" Text="" placeholder="Programa" runat="server" />
+                </div>
+
+                <asp:Button CssClass="btn btn-danger ml-2 my-0" ID="btnFiltrar" runat="server" Text="Filtrar" OnClick="btnFiltrar_Click" />
+            </div>
+        </div>
+
         <input id="txtCodigoModificarBeca" type="hidden" value="" runat="server" />
 
         <asp:SqlDataSource ID="sqlProgramasBecas" runat="server" ConnectionString="<%$ ConnectionStrings:OdioTodoConnectionString %>" SelectCommand="SELECT * FROM (
@@ -94,7 +110,9 @@
                 codigo, nombre, descripcion FROM Programa_Becas
             ) AS TBL
 WHERE NUMBER BETWEEN ((@index - 1) * 6 + 1) AND (@index * 6)
-ORDER BY TBL.codigo" DeleteCommand="DELETE FROM Programa_Becas WHERE codigo = @codigo" InsertCommand="INSERT INTO Programa_Becas(codigo, nombre, descripcion) VALUES (@codigo,@nombre,@descripcion)">
+AND codigo LIKE '%' + @codigo + '%'
+AND nombre LIKE '%' + @nombre + '%'
+ORDER BY TBL.codigo DESC" DeleteCommand="DELETE FROM Programa_Becas WHERE codigo = @codigo" InsertCommand="INSERT INTO Programa_Becas(codigo, nombre, descripcion) VALUES (@codigo,@nombre,@descripcion)">
             <DeleteParameters>
                 <asp:Parameter Name="codigo" />
             </DeleteParameters>
@@ -104,12 +122,13 @@ ORDER BY TBL.codigo" DeleteCommand="DELETE FROM Programa_Becas WHERE codigo = @c
                 <asp:Parameter Name="descripcion" />
             </InsertParameters>
             <SelectParameters>
-                <asp:Parameter DbType="Int32" Name="index" />
+                <asp:Parameter DbType="Int32" Name="index" DefaultValue="" />
+                <asp:Parameter DbType="String" Name="codigo" />
+                <asp:Parameter DbType="String" Name="nombre" />
             </SelectParameters>
         </asp:SqlDataSource>
 
         <asp:SqlDataSource ID="sqlProgramasBecasCantidad" runat="server" ConnectionString="<%$ ConnectionStrings:OdioTodoConnectionString %>" SelectCommand="SELECT (count(*) / 6) + CEILING(count(*) % 6) as indice FROM Programa_Becas"></asp:SqlDataSource>
-
 
         <section class="container">
 
@@ -216,8 +235,8 @@ ORDER BY TBL.codigo" DeleteCommand="DELETE FROM Programa_Becas WHERE codigo = @c
                  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalNuevoPrograma">Nueva programa de becas</button>
 
                 <div id="divOpcionesPaginacion" runat="server" class="btn-group" role="group" aria-label="Basic example">
-                    <a id="btnAtrasPaginacion" runat="server" class="btn btn-secondary">Atras</a>
-                    <a id="btnSiguientePaginacion" runat="server" class="btn btn-secondary">Siguiente</a>
+                    <asp:Button ID="btnAtrasPaginacion" runat="server" CssClass="btn btn-secondary" Text="Atras" OnClick="btnAtrasPaginacion_Click" />
+                    <asp:Button ID="btnSiguientePaginacion" runat="server" CssClass="btn btn-secondary" Text="Siguiente" OnClick="btnSiguientePaginacion_Click" />
                 </div>
                         
             </div>

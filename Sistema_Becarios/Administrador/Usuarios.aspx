@@ -6,6 +6,7 @@
 <head runat="server">
     <title>Gestion Usuarios</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/estilos-app.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
