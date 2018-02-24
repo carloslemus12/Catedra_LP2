@@ -38,10 +38,10 @@ public partial class Administrador : System.Web.UI.Page
         // Manejamos la paginacion
         DataView lectorNumFila = (DataView)this.sqlProgramasBecasCantidad.Select(DataSourceSelectArguments.Empty);
 
-        int longitudPaginas = 1;
+        double longitudPaginas = 1;
 
         if (lectorNumFila.Count > 0)
-            int.TryParse(lectorNumFila[0]["indice"].ToString(), out longitudPaginas);
+            double.TryParse(lectorNumFila[0]["indice"].ToString(), out longitudPaginas);
 
         if (longitudPaginas <= 1)
         {
@@ -68,94 +68,94 @@ public partial class Administrador : System.Web.UI.Page
 
             if (Request.QueryString["nombre"] != null)
                 this.txtNombreFiltro.Text = Request.QueryString["nombre"];
+        }
 
-            // Manejamos los datos que mostraremos en el indice
-            sqlProgramasBecas.SelectParameters["index"].DefaultValue = index.ToString();
-            sqlProgramasBecas.SelectParameters["codigo"].DefaultValue = codFiltro;
-            sqlProgramasBecas.SelectParameters["nombre"].DefaultValue = nombreFiltro;
+        // Manejamos los datos que mostraremos en el indice
+        sqlProgramasBecas.SelectParameters["index"].DefaultValue = index.ToString();
+        sqlProgramasBecas.SelectParameters["codigo"].DefaultValue = codFiltro;
+        sqlProgramasBecas.SelectParameters["nombre"].DefaultValue = nombreFiltro;
 
-            DataView lector = (DataView)this.sqlProgramasBecas.Select(DataSourceSelectArguments.Empty);
+        DataView lector = (DataView)this.sqlProgramasBecas.Select(DataSourceSelectArguments.Empty);
 
-            if (lector.Count > 0)
+        if (lector.Count > 0)
+        {
+            int incremento = 0;
+            foreach (DataRowView registro in lector)
             {
-                int incremento = 0;
-                foreach (DataRowView registro in lector)
-                {
-                    incremento++;
-                    // Paneles que serviran para crear el card
-                    Panel divCard = new Panel();
-                    divCard.CssClass = "card";
+                incremento++;
+                // Paneles que serviran para crear el card
+                Panel divCard = new Panel();
+                divCard.CssClass = "card";
 
-                    Panel divCardHeader = new Panel();
-                    divCardHeader.CssClass = "card-header bg-primary text-white";
+                Panel divCardHeader = new Panel();
+                divCardHeader.CssClass = "card-header bg-primary text-white";
 
-                    Panel divCardBody = new Panel();
-                    divCardBody.CssClass = "card-body";
+                Panel divCardBody = new Panel();
+                divCardBody.CssClass = "card-body";
 
-                    Panel divCardFooter = new Panel();
-                    divCardFooter.CssClass = "card-footer bg-dark d-flex justify-content-between";
+                Panel divCardFooter = new Panel();
+                divCardFooter.CssClass = "card-footer bg-dark d-flex justify-content-between";
 
-                    // Añadimos los controles a los elementos
-                    LiteralControl codigo = new LiteralControl();
-                    codigo.Text = "<h5 class='card-title'>Codigo: " + HttpUtility.HtmlDecode(registro["codigo"].ToString()) + "</h5>";
+                // Añadimos los controles a los elementos
+                LiteralControl codigo = new LiteralControl();
+                codigo.Text = "<h5 class='card-title'>Codigo: " + HttpUtility.HtmlDecode(registro["codigo"].ToString()) + "</h5>";
 
-                    divCardHeader.Controls.Add(codigo);
+                divCardHeader.Controls.Add(codigo);
 
-                    LiteralControl nombre = new LiteralControl();
-                    nombre.Text = "<div class='alert alert-dark' role='alert'>Nombre: " + HttpUtility.HtmlDecode(registro["nombre"].ToString()) + "</div> ";
+                LiteralControl nombre = new LiteralControl();
+                nombre.Text = "<div class='alert alert-dark' role='alert'>Nombre: " + HttpUtility.HtmlDecode(registro["nombre"].ToString()) + "</div> ";
 
-                    divCardBody.Controls.Add(nombre);
+                divCardBody.Controls.Add(nombre);
 
-                    string textoDescripcion = (registro["descripcion"] == null || registro["descripcion"].ToString().Trim().Equals("")) ? "No hay descripcion" : "Descripcion: " + HttpUtility.HtmlDecode(registro["descripcion"].ToString());
+                string textoDescripcion = (registro["descripcion"] == null || registro["descripcion"].ToString().Trim().Equals("")) ? "No hay descripcion" : "Descripcion: " + HttpUtility.HtmlDecode(registro["descripcion"].ToString());
 
-                    LiteralControl descripcion = new LiteralControl();
-                    descripcion.Text = "<div class='alert alert-success' role='alert'> " + textoDescripcion + " </div>";
+                LiteralControl descripcion = new LiteralControl();
+                descripcion.Text = "<div class='alert alert-success' role='alert'> " + textoDescripcion + " </div>";
 
-                    divCardBody.Controls.Add(descripcion);
+                divCardBody.Controls.Add(descripcion);
 
-                    UpdatePanel up = new UpdatePanel();
+                UpdatePanel up = new UpdatePanel();
 
 
-                    // Botones de accion
-                    Button btnModificar = new Button();
-                    btnModificar.CssClass = "btn btn-success";
-                    btnModificar.Text = "Modificar";
-                    btnModificar.Attributes["onclick"] = "$('#txtCodigoModificarBeca').val('" + HttpUtility.HtmlDecode(registro["codigo"].ToString()) + "');";
-                    btnModificar.Click += btnModificar_Click;
-                    btnModificar.Attributes["data-toggle"] = "modal";
-                    btnModificar.Attributes["data-target"] = "#modalModificarBecas";
+                // Botones de accion
+                Button btnModificar = new Button();
+                btnModificar.CssClass = "btn btn-success";
+                btnModificar.Text = "Modificar";
+                btnModificar.Attributes["onclick"] = "$('#txtCodigoModificarBeca').val('" + HttpUtility.HtmlDecode(registro["codigo"].ToString()) + "');";
+                btnModificar.Click += btnModificar_Click;
+                btnModificar.Attributes["data-toggle"] = "modal";
+                btnModificar.Attributes["data-target"] = "#modalModificarBecas";
 
-                    up.ContentTemplateContainer.Controls.Add(btnModificar);
+                up.ContentTemplateContainer.Controls.Add(btnModificar);
 
-                    Button btnEliminar = new Button();
-                    btnEliminar.Text = "Eliminar";
-                    btnEliminar.CssClass = "btn btn-danger";
-                    btnEliminar.Attributes["onclick"] = "$('#txtCodigoModificarBeca').val('" + HttpUtility.HtmlDecode(registro["codigo"].ToString()) + "');";
-                    btnEliminar.Click += btnEliminar_Click;
+                Button btnEliminar = new Button();
+                btnEliminar.Text = "Eliminar";
+                btnEliminar.CssClass = "btn btn-danger";
+                btnEliminar.Attributes["onclick"] = "$('#txtCodigoModificarBeca').val('" + HttpUtility.HtmlDecode(registro["codigo"].ToString()) + "');";
+                btnEliminar.Click += btnEliminar_Click;
 
-                    divCardFooter.Controls.Add(up);
-                    divCardFooter.Controls.Add(btnEliminar);
+                divCardFooter.Controls.Add(up);
+                divCardFooter.Controls.Add(btnEliminar);
 
-                    // Añadimos los diferentes div
-                    divCard.Controls.Add(divCardHeader);
-                    divCard.Controls.Add(divCardBody);
-                    divCard.Controls.Add(divCardFooter);
+                // Añadimos los diferentes div
+                divCard.Controls.Add(divCardHeader);
+                divCard.Controls.Add(divCardBody);
+                divCard.Controls.Add(divCardFooter);
 
-                    // Añadimos el div final
-                    this.divCardDeckProgramas.Controls.Add(divCard);
-                }
-
-                if (incremento <= 1)
-                {
-                    this.divFooter.Attributes["class"] = "container-fluid m-0 p-0 fixed-bottom";
-                }
+                // Añadimos el div final
+                this.divCardDeckProgramas.Controls.Add(divCard);
             }
-            else
+
+            if (incremento <= 1)
             {
-                // En caso de que no haya resultados
                 this.divFooter.Attributes["class"] = "container-fluid m-0 p-0 fixed-bottom";
-                this.divErrorCarga.InnerHtml = "<div class='alert alert-danger w-100 mt-3 text-center' role='alert'> ¡¡NO HAY DATOS!! </div>";
             }
+        }
+        else
+        {
+            // En caso de que no haya resultados
+            this.divFooter.Attributes["class"] = "container-fluid m-0 p-0 fixed-bottom";
+            this.divErrorCarga.InnerHtml = "<div class='alert alert-danger w-100 mt-3 text-center' role='alert'> ¡¡NO HAY DATOS!! </div>";
         }
     }
 

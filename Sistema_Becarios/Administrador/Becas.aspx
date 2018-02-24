@@ -128,7 +128,7 @@ ORDER BY TBL.codigo DESC" DeleteCommand="DELETE FROM Programa_Becas WHERE codigo
             </SelectParameters>
         </asp:SqlDataSource>
 
-        <asp:SqlDataSource ID="sqlProgramasBecasCantidad" runat="server" ConnectionString="<%$ ConnectionStrings:OdioTodoConnectionString %>" SelectCommand="SELECT (count(*) / 6) + CEILING(count(*) % 6) as indice FROM Programa_Becas"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="sqlProgramasBecasCantidad" runat="server" ConnectionString="<%$ ConnectionStrings:OdioTodoConnectionString %>" SelectCommand="SELECT count(*) / 6.0 as indice FROM Programa_Becas"></asp:SqlDataSource>
 
         <section class="container">
 
