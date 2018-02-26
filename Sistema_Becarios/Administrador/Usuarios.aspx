@@ -130,6 +130,58 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="modalModificarUsuarios" tabindex="-1" role="dialog" aria-labelledby="Modificar usuarios" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title">Modificar Usuario</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <div class="form-group">
+                            <label for="txtModificarNombreUsuerio">Nombres:</label>
+                            <asp:TextBox ID="txtModificarNombreUsuerio" ValidationGroup="modificarUsuario" runat="server" CssClass="form-control" placeholder="Nombre de usuario" />
+                            <asp:RequiredFieldValidator ControlToValidate="txtModificarNombreUsuerio" ValidationGroup="modificarUsuario" Display="Dynamic" runat="server" ErrorMessage="El nombre del usuario es obligatorio" CssClass="blockquote-footer text-danger"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtModificarApellidoUsuario">Apellidos:</label>
+                            <asp:TextBox ID="txtModificarApellidoUsuario" ValidationGroup="modificarUsuario" runat="server" CssClass="form-control" placeholder="Apellido de usuario" />
+                            <asp:RequiredFieldValidator ControlToValidate="txtModificarApellidoUsuario" ValidationGroup="modificarUsuario" Display="Dynamic" runat="server" ErrorMessage="El apellido del usuario es obligatorio" CssClass="blockquote-footer text-danger"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtModificarCorreoElectronico">Correo electronico:</label>
+                            <asp:TextBox ID="txtModificarCorreoElectronico" ValidationGroup="modificarUsuario" TextMode="Email" runat="server" CssClass="form-control" placeholder="Correo electronico" />
+                            <asp:RequiredFieldValidator ControlToValidate="txtModificarCorreoElectronico" ValidationGroup="modificarUsuario" Display="Dynamic" runat="server" ErrorMessage="El correo electronico es obligatorio" CssClass="blockquote-footer text-danger"/>
+                            <asp:RegularExpressionValidator ControlToValidate="txtModificarCorreoElectronico" ValidationGroup="modificarUsuario" Display="Dynamic" runat="server" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="El correo electronico no es valido" CssClass="blockquote-footer text-danger" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ddlModificarTipoUsuario">Tipo de usuario:</label>
+                            <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control">
+                                <asp:ListItem Value="1">Contador</asp:ListItem>
+                                <asp:ListItem Value="2">Gestor educativo</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtVerClaveUsuario">Clave del usuario:</label>
+                            <asp:TextBox ID="txtVerClaveUsuario" runat="server" CssClass="form-control" ReadOnly="true"/>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <asp:Button ID="btnModificarUsuario" ValidationGroup="modificarUsuario" runat="server" CssClass="btn btn-primary" Text="Modificar usuario"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </form>
 
     <!-- Pie de la pagina web -->
