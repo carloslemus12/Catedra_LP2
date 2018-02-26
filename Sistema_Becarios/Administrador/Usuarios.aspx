@@ -71,6 +71,65 @@
             </div>
         </nav>
 
+        <div class="modal fade" id="modalNuevoUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title">Nuevo Usuario</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <div class="form-group">
+                            <label for="txtNuevoNombreUsuerio">Nombres:</label>
+                            <asp:TextBox ID="txtNuevoNombreUsuerio" ValidationGroup="nuevoUsuario" runat="server" CssClass="form-control" placeholder="Nombre de usuario" />
+                            <asp:RequiredFieldValidator ControlToValidate="txtNuevoNombreUsuerio" ValidationGroup="nuevoUsuario" Display="Dynamic" runat="server" ErrorMessage="El nombre del usuario es obligatorio" CssClass="blockquote-footer text-danger"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtNuevoApellidoUsuario">Apellidos:</label>
+                            <asp:TextBox ID="txtNuevoApellidoUsuario" ValidationGroup="nuevoUsuario" runat="server" CssClass="form-control" placeholder="Apellido de usuario" />
+                            <asp:RequiredFieldValidator ControlToValidate="txtNuevoApellidoUsuario" ValidationGroup="nuevoUsuario" Display="Dynamic" runat="server" ErrorMessage="El apellido del usuario es obligatorio" CssClass="blockquote-footer text-danger"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtNuevoCorreoElectronico">Correo electronico:</label>
+                            <asp:TextBox ID="txtNuevoCorreoElectronico" ValidationGroup="nuevoUsuario" TextMode="Email" runat="server" CssClass="form-control" placeholder="Correo electronico" />
+                            <asp:RequiredFieldValidator ControlToValidate="txtNuevoCorreoElectronico" ValidationGroup="nuevoUsuario" Display="Dynamic" runat="server" ErrorMessage="El correo electronico es obligatorio" CssClass="blockquote-footer text-danger"/>
+                            <asp:RegularExpressionValidator ControlToValidate="txtNuevoCorreoElectronico" ValidationGroup="nuevoUsuario" Display="Dynamic" runat="server" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="El correo electronico no es valido" CssClass="blockquote-footer text-danger" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ddlTipoUsuario">Tipo de usuario:</label>
+                            <asp:DropDownList ID="ddlTipoUsuario" runat="server" CssClass="form-control">
+                                <asp:ListItem Value="1">Contador</asp:ListItem>
+                                <asp:ListItem Value="2">Gestor educativo</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtNuevaClaveAleatoria">Clave del usuario:</label>
+
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <button id="btnClaveAleatoria" type="button" class="input-group-text btn btn-danger">Aleatorio</button>
+                                </div>
+
+                                <asp:TextBox CssClass="form-control" ID="txtNuevaClaveAleatoria" runat="server" ValidationGroup="nuevoUsuario" placeholder="Codigo" ReadOnly="true" />
+                            </div>
+
+                            <asp:RequiredFieldValidator ControlToValidate="txtNuevaClaveAleatoria" ValidationGroup="nuevoUsuario" Display="Dynamic" runat="server" ErrorMessage="La clave es obligatorio" CssClass="blockquote-footer text-danger"/>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <asp:Button ID="btnNuevoUsuario" ValidationGroup="nuevoUsuario" runat="server" CssClass="btn btn-primary" Text="Guardar usuario"/>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 
     <!-- Pie de la pagina web -->
@@ -84,5 +143,20 @@
 
     <script src="../js/jquery-3.2.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btnClaveAleatoria").click(function () {
+                var letras = new Array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0");
+                var clave = letras[Math.floor(Math.random() * letras.length)];
+
+                for (var i = 0; i < (Math.floor(Math.random() * 9) + 3); i++) {
+                    clave += letras[Math.floor(Math.random() * letras.length)];
+                }
+
+                
+                $("#txtNuevaClaveAleatoria").val(clave);
+            });
+        });
+    </script>
 </body>
 </html>
