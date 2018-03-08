@@ -11,19 +11,19 @@
 <body>
     <form id="form1" runat="server">
         <input type="hidden" id="txtIndiceNivel" runat="server" />
-        <asp:SqlDataSource ID="sqlNiveles" runat="server" ConnectionString="<%$ ConnectionStrings:OdioTodoConnectionString %>" DeleteCommand="DELETE FROM [Niveles] WHERE [indice] = @indice" InsertCommand="INSERT INTO [Niveles] ([nombre]) VALUES (@nombre)" SelectCommand="SELECT [indice], [nombre] FROM [Niveles] WHERE ([nombre] LIKE '%' + @nombre + '%')" UpdateCommand="UPDATE [Niveles] SET [nombre] = @nombre WHERE [indice] = @indice">
+        <asp:SqlDataSource ID="sqlNiveles" runat="server" ConnectionString="<%$ ConnectionStrings:BecasFedisalConnectionString %>" DeleteCommand="DELETE FROM [Niveles] WHERE [ID] = @ID" InsertCommand="INSERT INTO [Niveles] ([nivel_educativo]) VALUES (@nivel_educativo)" SelectCommand="SELECT [ID], [nivel_educativo] FROM [Niveles] WHERE ([nivel_educativo] LIKE '%' + @nivel_educativo + '%')" UpdateCommand="UPDATE [Niveles] SET [nivel_educativo] = @nivel_educativo WHERE [ID] = @ID">
             <DeleteParameters>
-                <asp:Parameter Name="indice" Type="Int32" />
+                <asp:Parameter Name="ID" Type="Int32" />
             </DeleteParameters>
             <InsertParameters>
-                <asp:Parameter Name="nombre" Type="String" />
+                <asp:Parameter Name="nivel_educativo" Type="String" />
             </InsertParameters>
             <SelectParameters>
-                <asp:ControlParameter ControlID="txtNombreFiltro" DefaultValue="%" Name="nombre" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="txtNombreFiltro" DefaultValue="%" Name="nivel_educativo" PropertyName="Text" Type="String" />
             </SelectParameters>
             <UpdateParameters>
-                <asp:Parameter Name="nombre" Type="String" />
-                <asp:Parameter Name="indice" Type="Int32" />
+                <asp:Parameter Name="nivel_educativo" Type="String" />
+                <asp:Parameter Name="ID" Type="Int32" />
             </UpdateParameters>
         </asp:SqlDataSource>
 
@@ -114,10 +114,10 @@
 
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
-                <asp:GridView ID="tablaNiveles" CssClass="mt-3 table table-dark table-hover text-center" runat="server" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="indice" DataSourceID="sqlNiveles" OnPreRender="tablaNiveles_PreRender" OnRowCreated="tablaNiveles_RowCreated" OnSelectedIndexChanged="tablaNiveles_SelectedIndexChanged">
+                <asp:GridView ID="tablaNiveles" CssClass="mt-3 table table-dark table-hover text-center" runat="server" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="sqlNiveles" OnPreRender="tablaNiveles_PreRender" OnRowCreated="tablaNiveles_RowCreated" OnSelectedIndexChanged="tablaNiveles_SelectedIndexChanged">
                     <Columns>
-                        <asp:BoundField DataField="indice" HeaderText="indice" InsertVisible="False" ReadOnly="True" SortExpression="indice" Visible="False" />
-                        <asp:BoundField DataField="nombre" HeaderText="Carrera" SortExpression="nombre" />
+                        <asp:BoundField DataField="ID" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="ID" Visible="False" />
+                        <asp:BoundField DataField="nivel_educativo" HeaderText="Nivel educativo" SortExpression="nivel_educativo" />
                         <asp:CommandField ButtonType="Image" HeaderText="Opciones" SelectImageUrl="~/img/update.png" ShowSelectButton="True" />
                         <asp:CommandField ButtonType="Image" DeleteImageUrl="~/img/delete.png" ShowDeleteButton="True" />
                     </Columns>

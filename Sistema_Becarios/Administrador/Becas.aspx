@@ -105,14 +105,14 @@
 
         <input id="txtCodigoModificarBeca" type="hidden" value="" runat="server" />
 
-        <asp:SqlDataSource ID="sqlProgramasBecas" runat="server" ConnectionString="<%$ ConnectionStrings:OdioTodoConnectionString %>" SelectCommand="SELECT * FROM (
+        <asp:SqlDataSource ID="sqlProgramasBecas" runat="server" ConnectionString="<%$ ConnectionStrings:BecasFedisalConnectionString %>" SelectCommand="SELECT * FROM (
             SELECT ROW_NUMBER() OVER(ORDER BY codigo) AS NUMBER,
-                codigo, nombre, descripcion FROM Programa_Becas
+                codigo, nombre, descripcion FROM Programas
             ) AS TBL
 WHERE NUMBER BETWEEN ((@index - 1) * 6 + 1) AND (@index * 6)
 AND codigo LIKE '%' + @codigo + '%'
 AND nombre LIKE '%' + @nombre + '%'
-ORDER BY TBL.codigo DESC" DeleteCommand="DELETE FROM Programa_Becas WHERE codigo = @codigo" InsertCommand="INSERT INTO Programa_Becas(codigo, nombre, descripcion) VALUES (@codigo,@nombre,@descripcion)">
+ORDER BY TBL.codigo DESC" DeleteCommand="DELETE FROM Programas WHERE codigo = @codigo" InsertCommand="INSERT INTO Programas (codigo, nombre, descripcion) VALUES (@codigo,@nombre,@descripcion)">
             <DeleteParameters>
                 <asp:Parameter Name="codigo" />
             </DeleteParameters>
@@ -128,7 +128,7 @@ ORDER BY TBL.codigo DESC" DeleteCommand="DELETE FROM Programa_Becas WHERE codigo
             </SelectParameters>
         </asp:SqlDataSource>
 
-        <asp:SqlDataSource ID="sqlProgramasBecasCantidad" runat="server" ConnectionString="<%$ ConnectionStrings:OdioTodoConnectionString %>" SelectCommand="SELECT count(*) / 6.0 as indice FROM Programa_Becas"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="sqlProgramasBecasCantidad" runat="server" ConnectionString="<%$ ConnectionStrings:BecasFedisalConnectionString %>" SelectCommand="SELECT count(*) / 6.0 as indice FROM Programas"></asp:SqlDataSource>
 
         <section class="container">
 

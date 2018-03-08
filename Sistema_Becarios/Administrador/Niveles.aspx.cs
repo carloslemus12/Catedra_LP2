@@ -17,7 +17,9 @@ public partial class Administrador_Niveles : System.Web.UI.Page
         try
         {
             string nombre = this.txtNombreNuevoNivel.Text.Trim();
-            this.sqlNiveles.InsertParameters["nombre"].DefaultValue = nombre;
+            this.sqlNiveles.InsertParameters["nivel_educativo"].DefaultValue = nombre;
+
+            this.txtNombreNuevoNivel.Text = "";
 
             if (this.sqlNiveles.Insert() > 0)
                 this.tablaNiveles.DataBind();
@@ -68,9 +70,10 @@ public partial class Administrador_Niveles : System.Web.UI.Page
         {
             string indice = this.txtIndiceNivel.Value.Trim();
             string nombre = this.txtNombreModificarNivel.Text.Trim();
+            this.txtNombreModificarNivel.Text = "";
 
-            this.sqlNiveles.UpdateParameters["indice"].DefaultValue = indice;
-            this.sqlNiveles.UpdateParameters["nombre"].DefaultValue = nombre;
+            this.sqlNiveles.UpdateParameters["ID"].DefaultValue = indice;
+            this.sqlNiveles.UpdateParameters["nivel_educativo"].DefaultValue = nombre;
 
             if (this.sqlNiveles.Update() > 0)
                 this.tablaNiveles.DataBind();

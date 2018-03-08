@@ -165,7 +165,7 @@ public partial class Administrador : System.Web.UI.Page
 
         try
         {
-            SqlCommand comando = new SqlCommand("SELECT nombre, descripcion FROM Programa_Becas WHERE codigo = @codigo", sql);
+            SqlCommand comando = new SqlCommand("SELECT nombre, descripcion FROM Programas WHERE codigo = @codigo", sql);
             comando.Parameters.Add("codigo", SqlDbType.Char);
             comando.Parameters["codigo"].Value = this.txtCodigoModificarBeca.Value;
             sql.Open();
@@ -246,7 +246,7 @@ public partial class Administrador : System.Web.UI.Page
         // Creamos la consulta
         string set = "SET nombre = @nombre, descripcion = @descripcion" + ((mismoCodigo) ? "" : ", codigo = @nuevo_codigo");
 
-        string consulta = "UPDATE Programa_Becas " + set + " WHERE codigo = @codigo";
+        string consulta = "UPDATE Programas " + set + " WHERE codigo = @codigo";
 
         SqlConnection sql = new SqlConnection(this.sqlProgramasBecas.ConnectionString);
 

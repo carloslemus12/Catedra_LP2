@@ -31,8 +31,11 @@ public partial class Administrador_Universidades : System.Web.UI.Page
         try
         {
             string nombre = this.txtNombreNuevaUniversidad.Text.Trim();
-            this.sqlUniversidades.InsertParameters["nombre"].DefaultValue = nombre;
+
+            this.sqlUniversidades.InsertParameters["universidad"].DefaultValue = nombre;
+
             this.sqlUniversidades.Insert();
+
             this.txtNombreNuevaUniversidad.Text = "";
             this.tablaUniversidad.DataBind();
         }
@@ -68,8 +71,8 @@ public partial class Administrador_Universidades : System.Web.UI.Page
             string codigo = this.txtIndice.Value.Trim();
             string nombre = this.txtNombreModificarUniversidad.Text.Trim();
 
-            this.sqlUniversidades.UpdateParameters["nombre"].DefaultValue = nombre;
-            this.sqlUniversidades.UpdateParameters["indice"].DefaultValue = codigo;
+            this.sqlUniversidades.UpdateParameters["universidad"].DefaultValue = nombre;
+            this.sqlUniversidades.UpdateParameters["ID"].DefaultValue = codigo;
 
             if (this.sqlUniversidades.Update() <= 0)
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert", "alert('No se ha podido modificar la universidad');", true);

@@ -41,12 +41,14 @@ public partial class Administrador_Carreras : System.Web.UI.Page
         try
         {
             string nombre = this.txtNombreNuevaCarrera.Text.Trim();
-            this.sqlCarreras.InsertParameters["nombre"].DefaultValue = nombre;
+            this.sqlCarreras.InsertParameters["carrera"].DefaultValue = nombre;
 
             if (this.sqlCarreras.Insert() > 0)
                 this.tablaCarrera.DataBind();
             else
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert", "alert('Error al guardar la carrera');", true);
+
+            this.txtNombreNuevaCarrera.Text = "";
         }
         catch (Exception)
         {
@@ -67,8 +69,10 @@ public partial class Administrador_Carreras : System.Web.UI.Page
             string indice = this.txtIndiceCarrera.Value.Trim();
             string nombre = this.txtModificarCarrera.Text.Trim();
 
-            this.sqlCarreras.UpdateParameters["indice"].DefaultValue = indice;
-            this.sqlCarreras.UpdateParameters["nombre"].DefaultValue = nombre;
+            this.txtModificarCarrera.Text = "";
+
+            this.sqlCarreras.UpdateParameters["ID"].DefaultValue = indice;
+            this.sqlCarreras.UpdateParameters["carrera"].DefaultValue = nombre;
 
             if (this.sqlCarreras.Update() > 0)
                 this.DataBind();
