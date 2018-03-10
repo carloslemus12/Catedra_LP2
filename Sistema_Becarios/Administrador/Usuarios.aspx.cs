@@ -179,8 +179,6 @@ public partial class Administrador_Usuarios : System.Web.UI.Page
 
     protected void btnModificar_Click(object sender, EventArgs e)
     {
-        this.txtModificarClave.Attributes.Remove("readonly");
-
         string id = this.txtModId.Value.Trim();
         string nombre = this.txtModificarUsuario.Text.Trim();
         string apellido = this.txtModificarApellido.Text.Trim();
@@ -189,11 +187,8 @@ public partial class Administrador_Usuarios : System.Web.UI.Page
         string direccion = this.txtModificarDireccion.Text.Trim();
         string coreo = this.txtModificarCoreo.Text.Trim();
         string fecha = this.txtModificarFecha.Text.Trim();
-        string clave = this.txtModificarClave.Text.Trim();
         string tipo = this.ddlModificarTipo.SelectedValue;
         string estado = (this.chkEstado.Checked)? "1" : "0";
-
-        this.txtModificarClave.Attributes.Add("readonly", "readonly");
 
         this.sqlUsuarios.UpdateParameters["ID"].DefaultValue = id;
         this.sqlUsuarios.UpdateParameters["Nombres"].DefaultValue = nombre;
@@ -203,7 +198,6 @@ public partial class Administrador_Usuarios : System.Web.UI.Page
         this.sqlUsuarios.UpdateParameters["correo"].DefaultValue = coreo;
         this.sqlUsuarios.UpdateParameters["direccion_be"].DefaultValue = direccion;
         this.sqlUsuarios.UpdateParameters["fecha_nacimiento"].DefaultValue = fecha;
-        this.sqlUsuarios.UpdateParameters["contraseña"].DefaultValue = clave;
         this.sqlUsuarios.UpdateParameters["TipoUsuarios"].DefaultValue = tipo;
         this.sqlUsuarios.UpdateParameters["Estado"].DefaultValue = estado;
 

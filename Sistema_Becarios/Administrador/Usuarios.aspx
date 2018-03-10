@@ -7,11 +7,12 @@
     <title>Gestion Usuarios</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/estilos-app.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
     <form id="form1" runat="server">
         <input id="txtAccion" runat="server" type="hidden" />
-        <asp:SqlDataSource ID="sqlUsuarios" runat="server" ConnectionString="<%$ ConnectionStrings:BecasFedisalConnectionString %>" DeleteCommand="DELETE FROM [Usuarios] WHERE [ID] = @ID" InsertCommand="INSERT INTO [Usuarios] ([Nombres], [Apellidos], [dui], [telefono], [correo], [direccion_be], [fecha_nacimiento], [contraseña], [TipoUsuarios], [Estado]) VALUES (@Nombres, @Apellidos, @dui, @telefono, @correo, @direccion_be, @fecha_nacimiento, @contraseña, @TipoUsuarios, @Estado)" SelectCommand="SELECT Usuarios.ID, CONCAT(Usuarios.Nombres, ' ', Usuarios.Apellidos) AS [Nombre completo], TipoUsuarios.tipo_usuario, CASE WHEN Usuarios.Estado = 1 THEN 'Activo' ELSE 'Inactivo' END AS [Estado] FROM Usuarios INNER JOIN TipoUsuarios ON Usuarios.TipoUsuarios = TipoUsuarios.ID" UpdateCommand="UPDATE [Usuarios] SET [Nombres] = @Nombres, [Apellidos] = @Apellidos, [dui] = @dui, [telefono] = @telefono, [correo] = @correo, [direccion_be] = @direccion_be, [fecha_nacimiento] = @fecha_nacimiento, [contraseña] = @contraseña, [TipoUsuarios] = @TipoUsuarios, [Estado] = @Estado WHERE [ID] = @ID">
+        <asp:SqlDataSource ID="sqlUsuarios" runat="server" ConnectionString="<%$ ConnectionStrings:BecasFedisalConnectionString %>" DeleteCommand="DELETE FROM [Usuarios] WHERE [ID] = @ID" InsertCommand="INSERT INTO [Usuarios] ([Nombres], [Apellidos], [dui], [telefono], [correo], [direccion_be], [fecha_nacimiento], [contraseña], [TipoUsuarios], [Estado]) VALUES (@Nombres, @Apellidos, @dui, @telefono, @correo, @direccion_be, @fecha_nacimiento, @contraseña, @TipoUsuarios, @Estado)" SelectCommand="SELECT Usuarios.ID, CONCAT(Usuarios.Nombres, ' ', Usuarios.Apellidos) AS [Nombre completo], TipoUsuarios.tipo_usuario, CASE WHEN Usuarios.Estado = 1 THEN 'Activo' ELSE 'Inactivo' END AS [Estado] FROM Usuarios INNER JOIN TipoUsuarios ON Usuarios.TipoUsuarios = TipoUsuarios.ID" UpdateCommand="UPDATE [Usuarios] SET [Nombres] = @Nombres, [Apellidos] = @Apellidos, [dui] = @dui, [telefono] = @telefono, [correo] = @correo, [direccion_be] = @direccion_be, [fecha_nacimiento] = @fecha_nacimiento, [TipoUsuarios] = @TipoUsuarios, [Estado] = @Estado WHERE [ID] = @ID">
             <DeleteParameters>
                 <asp:Parameter Name="ID" Type="Int32" />
             </DeleteParameters>
@@ -35,7 +36,6 @@
                 <asp:Parameter Name="correo" Type="String" />
                 <asp:Parameter Name="direccion_be" Type="String" />
                 <asp:Parameter DbType="Date" Name="fecha_nacimiento" />
-                <asp:Parameter Name="contraseña" Type="String" />
                 <asp:Parameter Name="TipoUsuarios" Type="Int32" />
                 <asp:Parameter Name="Estado" Type="Int32" />
                 <asp:Parameter Name="ID" Type="Int32" />
@@ -191,6 +191,8 @@
                 </ContentTemplate>
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="tablaUsuario" EventName="SelectedIndexChanged" />
+                    <asp:AsyncPostBackTrigger ControlID="btnModificar" EventName="Click" />
+                    <asp:AsyncPostBackTrigger ControlID="btnNuevoUsuario" EventName="Click" />
                 </Triggers>
             </asp:UpdatePanel>
         </section>
@@ -352,10 +354,10 @@
 
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend">
-                                    <button id="btnModClaveAleatoria" type="button" class="input-group-text btn btn-danger">Aleatorio</button>
+                                    <button id="btnModClaveAleatoria" type="button" class="input-group-text btn btn-danger"><i id="contenidoIcon" class="material-icons">remove_red_eye</i></button>
                                 </div>
 
-                                <asp:TextBox CssClass="form-control" ID="txtModificarClave" runat="server" ValidationGroup="nuevoUsuario" placeholder="Codigo"/>
+                                <asp:TextBox CssClass="form-control" ID="txtModificarClave" TextMode="Password" runat="server" ValidationGroup="nuevoUsuario" placeholder="Clave"/>
                             </div>
 
                             <asp:RequiredFieldValidator ControlToValidate="txtModificarClave" ValidationGroup="modificarUsuario" Display="Dynamic" runat="server" ErrorMessage="La clave es obligatorio" CssClass="blockquote-footer text-danger"/>
@@ -406,8 +408,33 @@
                     nuevaClave();
                 });
 
+                $('#btnNuevoUsuario').click(function () {
+                    $('#modalNuevoUsuario').modal('toggle');
+                });
+
+                $("#modalModificarUsuario").on('shown.bs.modal', function (e) {
+                    $("#contenidoIcon").html("remove_red_eye");
+                    $('#txtModificarClave').prop('type', 'password');
+                });
+
                 $("#btnClaveAleatoria").click(function () {
                     nuevaClave();
+                });
+
+                $('#btnModificar').click(function () {
+                    $('#modalModificarUsuario').modal('toggle');
+                });
+
+
+                $('#btnModClaveAleatoria').click(function () {
+                    if ($("#contenidoIcon").html() == "format_clear") {
+                        $("#contenidoIcon").html("remove_red_eye");
+                        $('#txtModificarClave').prop('type', 'password');
+                    }
+                    else {
+                        $("#contenidoIcon").html("format_clear");
+                        $('#txtModificarClave').prop('type', 'text');
+                    }
                 });
             });
         </script>
