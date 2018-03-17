@@ -32,6 +32,13 @@
                         <asp:RequiredFieldValidator ControlToValidate="txtPassword" ErrorMessage="La clave del usuario es obligatorio" runat="server" Display="Dynamic" CssClass="text-danger" />
                     </div>
 
+                    <div id="divMsg" runat="server" class="alert alert-danger alert-dismissible fade show mb-0 d-none" role="alert">
+                        <strong>ERROR:</strong> <span id="spnMsg" runat="server"></span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
                 </div>
                 <div class="card-footer text-muted">
                     <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-danger text-white w-100" Text="Iniciar secion" OnClick="btnLogin_Click" />

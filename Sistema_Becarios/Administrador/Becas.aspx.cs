@@ -18,6 +18,9 @@ public partial class Administrador : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        // En caso de que la seccion no esta abierta
+        if (Session["usuario"] == null) Response.Redirect("/login");
+
         string codFiltro = "%", nombreFiltro = "%";
         // Obtenemos los datos del indice
         if (Request.QueryString["indice"] != null)
@@ -53,12 +56,12 @@ public partial class Administrador : System.Web.UI.Page
             if (index <= 1)
                 this.btnAtrasPaginacion.Visible = false;
             else
-                this.urlBack = "/Administrador/Becas.aspx?indice=" + (index - 1);
+                this.urlBack = "/Administracion/Becas?indice=" + (index - 1);
 
             if (index >= longitudPaginas)
                 this.btnSiguientePaginacion.Visible = false;
             else
-                this.urlNext = "/Administrador/Becas.aspx?indice=" + (index + 1);
+                this.urlNext = "/Administracion/Becas?indice=" + (index + 1);
         }
 
         if (!IsPostBack)
@@ -315,8 +318,14 @@ public partial class Administrador : System.Web.UI.Page
         else
             this.nombre = "";
 
-        string url = "/Administrador/Becas.aspx?indice=" + this.index + this.cod + this.nombre;
+        string url = "/Administracion/Becas?indice=" + this.index + this.cod + this.nombre;
 
         Response.Redirect(url);    
+    }
+
+    protected void btnCerrarSecion_Click(object sender, EventArgs e)
+    {
+        Session.Abandon();
+        Response.Redirect("/login");
     }
 }

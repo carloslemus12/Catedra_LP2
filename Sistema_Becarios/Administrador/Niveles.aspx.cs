@@ -9,7 +9,8 @@ public partial class Administrador_Niveles : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        // En caso de que la seccion no esta abierta
+        if (Session["usuario"] == null) Response.Redirect("/login");
     }
 
     protected void btnNuevaCarrera_Click(object sender, EventArgs e)

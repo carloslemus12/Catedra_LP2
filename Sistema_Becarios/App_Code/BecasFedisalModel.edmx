@@ -1,0 +1,1107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BecasFedisalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Becarios">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="codigo_programa" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="codigo_becario" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="DatosAcademico" Type="int" Nullable="false" />
+          <Property Name="Usuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Carreras">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="carrera" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Datos_Beca">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="total_inicial" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ejecutado" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="sin_ejecutar" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="DatosAcademicos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nivel" Type="int" Nullable="false" />
+          <Property Name="Universidad" Type="int" Nullable="false" />
+          <Property Name="Carrera" Type="int" Nullable="false" />
+          <Property Name="fecha_inicio" Type="date" Nullable="false" />
+          <Property Name="fecha_finalizacion" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Desembolsos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoDesembolso" Type="int" Nullable="false" />
+          <Property Name="monto_desembolso" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="fecha_desembolso" Type="date" Nullable="false" />
+          <Property Name="Presupuesto" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="correo" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Usuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estados">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_estado" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Incidentes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoIncidente" Type="int" Nullable="false" />
+          <Property Name="detalle" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Materias">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_materia" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="uv_materia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Niveles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nivel_educativo" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notas">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Materia" Type="int" Nullable="false" />
+          <Property Name="nota" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Ciclo" Type="int" Nullable="false" />
+          <Property Name="tercio_superior" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Becario" Type="varchar" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Presupuestos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libros" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="colegiatura" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="manutencion" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="matricula" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="aranceles" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="seguro" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="trabajo_graduacion" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Becario" Type="varchar" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Programas">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="nombre" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="codigo" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TipoDesembolso">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo_desembolso" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoIncidente">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo_incidente" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoUsuarios">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo_usuario" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Universidades">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="universidad" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dui" Type="varchar" MaxLength="10" />
+          <Property Name="telefono" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="direccion_be" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="correo" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="fecha_nacimiento" Type="date" Nullable="false" />
+          <Property Name="contraseña" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="TipoUsuarios" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Becarios__codigo__30F848ED">
+          <End Role="Programas" Type="Self.Programas" Multiplicity="1" />
+          <End Role="Becarios" Type="Self.Becarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Programas">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="Becarios">
+              <PropertyRef Name="codigo_programa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Becarios__DatosA__31EC6D26">
+          <End Role="DatosAcademicos" Type="Self.DatosAcademicos" Multiplicity="1" />
+          <End Role="Becarios" Type="Self.Becarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatosAcademicos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Becarios">
+              <PropertyRef Name="DatosAcademico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Becarios__Usuari__32E0915F">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Becarios" Type="Self.Becarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Becarios">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosAcad__Carre__33D4B598">
+          <End Role="Carreras" Type="Self.Carreras" Multiplicity="1" />
+          <End Role="DatosAcademicos" Type="Self.DatosAcademicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carreras">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DatosAcademicos">
+              <PropertyRef Name="Carrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosAcad__Nivel__34C8D9D1">
+          <End Role="Niveles" Type="Self.Niveles" Multiplicity="1" />
+          <End Role="DatosAcademicos" Type="Self.DatosAcademicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Niveles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DatosAcademicos">
+              <PropertyRef Name="Nivel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosAcad__Unive__35BCFE0A">
+          <End Role="Universidades" Type="Self.Universidades" Multiplicity="1" />
+          <End Role="DatosAcademicos" Type="Self.DatosAcademicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Universidades">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DatosAcademicos">
+              <PropertyRef Name="Universidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Desembols__Presu__36B12243">
+          <End Role="Presupuestos" Type="Self.Presupuestos" Multiplicity="1" />
+          <End Role="Desembolsos" Type="Self.Desembolsos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presupuestos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Desembolsos">
+              <PropertyRef Name="Presupuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Desembols__TipoD__37A5467C">
+          <End Role="TipoDesembolso" Type="Self.TipoDesembolso" Multiplicity="1" />
+          <End Role="Desembolsos" Type="Self.Desembolsos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDesembolso">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Desembolsos">
+              <PropertyRef Name="TipoDesembolso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Empleados__Usuar__38996AB5">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Incidente__TipoI__398D8EEE">
+          <End Role="TipoIncidente" Type="Self.TipoIncidente" Multiplicity="1" />
+          <End Role="Incidentes" Type="Self.Incidentes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoIncidente">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Incidentes">
+              <PropertyRef Name="TipoIncidente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Notas__Becario__3A81B327">
+          <End Role="Becarios" Type="Self.Becarios" Multiplicity="1" />
+          <End Role="Notas" Type="Self.Notas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Becarios">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Notas">
+              <PropertyRef Name="Becario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Notas__Materia__3B75D760">
+          <End Role="Materias" Type="Self.Materias" Multiplicity="1" />
+          <End Role="Notas" Type="Self.Notas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materias">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Notas">
+              <PropertyRef Name="Materia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Presupues__Becar__3C69FB99">
+          <End Role="Becarios" Type="Self.Becarios" Multiplicity="1" />
+          <End Role="Presupuestos" Type="Self.Presupuestos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Becarios">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Presupuestos">
+              <PropertyRef Name="Becario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__TipoUs__3E52440B">
+          <End Role="TipoUsuarios" Type="Self.TipoUsuarios" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuarios">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="TipoUsuarios" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BecasFedisalModelStoreContainer">
+          <EntitySet Name="Becarios" EntityType="Self.Becarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Carreras" EntityType="Self.Carreras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Datos_Beca" EntityType="Self.Datos_Beca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DatosAcademicos" EntityType="Self.DatosAcademicos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Desembolsos" EntityType="Self.Desembolsos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estados" EntityType="Self.Estados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Incidentes" EntityType="Self.Incidentes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materias" EntityType="Self.Materias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Niveles" EntityType="Self.Niveles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notas" EntityType="Self.Notas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Presupuestos" EntityType="Self.Presupuestos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Programas" EntityType="Self.Programas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoDesembolso" EntityType="Self.TipoDesembolso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoIncidente" EntityType="Self.TipoIncidente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoUsuarios" EntityType="Self.TipoUsuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Universidades" EntityType="Self.Universidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Becarios__codigo__30F848ED" Association="Self.FK__Becarios__codigo__30F848ED">
+            <End Role="Programas" EntitySet="Programas" />
+            <End Role="Becarios" EntitySet="Becarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Becarios__DatosA__31EC6D26" Association="Self.FK__Becarios__DatosA__31EC6D26">
+            <End Role="DatosAcademicos" EntitySet="DatosAcademicos" />
+            <End Role="Becarios" EntitySet="Becarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Becarios__Usuari__32E0915F" Association="Self.FK__Becarios__Usuari__32E0915F">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Becarios" EntitySet="Becarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosAcad__Carre__33D4B598" Association="Self.FK__DatosAcad__Carre__33D4B598">
+            <End Role="Carreras" EntitySet="Carreras" />
+            <End Role="DatosAcademicos" EntitySet="DatosAcademicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosAcad__Nivel__34C8D9D1" Association="Self.FK__DatosAcad__Nivel__34C8D9D1">
+            <End Role="Niveles" EntitySet="Niveles" />
+            <End Role="DatosAcademicos" EntitySet="DatosAcademicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosAcad__Unive__35BCFE0A" Association="Self.FK__DatosAcad__Unive__35BCFE0A">
+            <End Role="Universidades" EntitySet="Universidades" />
+            <End Role="DatosAcademicos" EntitySet="DatosAcademicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Desembols__Presu__36B12243" Association="Self.FK__Desembols__Presu__36B12243">
+            <End Role="Presupuestos" EntitySet="Presupuestos" />
+            <End Role="Desembolsos" EntitySet="Desembolsos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Desembols__TipoD__37A5467C" Association="Self.FK__Desembols__TipoD__37A5467C">
+            <End Role="TipoDesembolso" EntitySet="TipoDesembolso" />
+            <End Role="Desembolsos" EntitySet="Desembolsos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Empleados__Usuar__38996AB5" Association="Self.FK__Empleados__Usuar__38996AB5">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Incidente__TipoI__398D8EEE" Association="Self.FK__Incidente__TipoI__398D8EEE">
+            <End Role="TipoIncidente" EntitySet="TipoIncidente" />
+            <End Role="Incidentes" EntitySet="Incidentes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Notas__Becario__3A81B327" Association="Self.FK__Notas__Becario__3A81B327">
+            <End Role="Becarios" EntitySet="Becarios" />
+            <End Role="Notas" EntitySet="Notas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Notas__Materia__3B75D760" Association="Self.FK__Notas__Materia__3B75D760">
+            <End Role="Materias" EntitySet="Materias" />
+            <End Role="Notas" EntitySet="Notas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Presupues__Becar__3C69FB99" Association="Self.FK__Presupues__Becar__3C69FB99">
+            <End Role="Becarios" EntitySet="Becarios" />
+            <End Role="Presupuestos" EntitySet="Presupuestos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__TipoUs__3E52440B" Association="Self.FK__Usuarios__TipoUs__3E52440B">
+            <End Role="TipoUsuarios" EntitySet="TipoUsuarios" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BecasFedisalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Becarios">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="codigo_programa" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="codigo_becario" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DatosAcademico" Type="Int32" Nullable="false" />
+          <Property Name="Usuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Programas" Relationship="Self.FK__Becarios__codigo__30F848ED" FromRole="Becarios" ToRole="Programas" />
+          <NavigationProperty Name="DatosAcademicos" Relationship="Self.FK__Becarios__DatosA__31EC6D26" FromRole="Becarios" ToRole="DatosAcademicos" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Becarios__Usuari__32E0915F" FromRole="Becarios" ToRole="Usuarios" />
+          <NavigationProperty Name="Notas" Relationship="Self.FK__Notas__Becario__3A81B327" FromRole="Becarios" ToRole="Notas" />
+          <NavigationProperty Name="Presupuestos" Relationship="Self.FK__Presupues__Becar__3C69FB99" FromRole="Becarios" ToRole="Presupuestos" />
+        </EntityType>
+        <EntityType Name="Carreras">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="carrera" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DatosAcademicos" Relationship="Self.FK__DatosAcad__Carre__33D4B598" FromRole="Carreras" ToRole="DatosAcademicos" />
+        </EntityType>
+        <EntityType Name="Datos_Beca">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="total_inicial" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ejecutado" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="sin_ejecutar" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="DatosAcademicos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nivel" Type="Int32" Nullable="false" />
+          <Property Name="Universidad" Type="Int32" Nullable="false" />
+          <Property Name="Carrera" Type="Int32" Nullable="false" />
+          <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fecha_finalizacion" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Becarios" Relationship="Self.FK__Becarios__DatosA__31EC6D26" FromRole="DatosAcademicos" ToRole="Becarios" />
+          <NavigationProperty Name="Carreras" Relationship="Self.FK__DatosAcad__Carre__33D4B598" FromRole="DatosAcademicos" ToRole="Carreras" />
+          <NavigationProperty Name="Niveles" Relationship="Self.FK__DatosAcad__Nivel__34C8D9D1" FromRole="DatosAcademicos" ToRole="Niveles" />
+          <NavigationProperty Name="Universidades" Relationship="Self.FK__DatosAcad__Unive__35BCFE0A" FromRole="DatosAcademicos" ToRole="Universidades" />
+        </EntityType>
+        <EntityType Name="Desembolsos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoDesembolso" Type="Int32" Nullable="false" />
+          <Property Name="monto_desembolso" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="fecha_desembolso" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Presupuesto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Presupuestos" Relationship="Self.FK__Desembols__Presu__36B12243" FromRole="Desembolsos" ToRole="Presupuestos" />
+          <NavigationProperty Name="TipoDesembolso1" Relationship="Self.FK__Desembols__TipoD__37A5467C" FromRole="Desembolsos" ToRole="TipoDesembolso" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="correo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Usuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Empleados__Usuar__38996AB5" FromRole="Empleados" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Estados">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_estado" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Incidentes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoIncidente" Type="Int32" Nullable="false" />
+          <Property Name="detalle" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TipoIncidente1" Relationship="Self.FK__Incidente__TipoI__398D8EEE" FromRole="Incidentes" ToRole="TipoIncidente" />
+        </EntityType>
+        <EntityType Name="Materias">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_materia" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uv_materia" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Notas" Relationship="Self.FK__Notas__Materia__3B75D760" FromRole="Materias" ToRole="Notas" />
+        </EntityType>
+        <EntityType Name="Niveles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nivel_educativo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DatosAcademicos" Relationship="Self.FK__DatosAcad__Nivel__34C8D9D1" FromRole="Niveles" ToRole="DatosAcademicos" />
+        </EntityType>
+        <EntityType Name="Notas">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Materia" Type="Int32" Nullable="false" />
+          <Property Name="nota" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Ciclo" Type="Int32" Nullable="false" />
+          <Property Name="tercio_superior" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Becario" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Becarios" Relationship="Self.FK__Notas__Becario__3A81B327" FromRole="Notas" ToRole="Becarios" />
+          <NavigationProperty Name="Materias" Relationship="Self.FK__Notas__Materia__3B75D760" FromRole="Notas" ToRole="Materias" />
+        </EntityType>
+        <EntityType Name="Presupuestos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libros" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="colegiatura" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="manutencion" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="matricula" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="aranceles" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="seguro" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="trabajo_graduacion" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Becario" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Becarios" Relationship="Self.FK__Presupues__Becar__3C69FB99" FromRole="Presupuestos" ToRole="Becarios" />
+          <NavigationProperty Name="Desembolsos" Relationship="Self.FK__Desembols__Presu__36B12243" FromRole="Presupuestos" ToRole="Desembolsos" />
+        </EntityType>
+        <EntityType Name="Programas">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="nombre" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="codigo" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Becarios" Relationship="Self.FK__Becarios__codigo__30F848ED" FromRole="Programas" ToRole="Becarios" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TipoDesembolso">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo_desembolso" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Desembolsos" Relationship="Self.FK__Desembols__TipoD__37A5467C" FromRole="TipoDesembolso" ToRole="Desembolsos" />
+        </EntityType>
+        <EntityType Name="TipoIncidente">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo_incidente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Incidentes" Relationship="Self.FK__Incidente__TipoI__398D8EEE" FromRole="TipoIncidente" ToRole="Incidentes" />
+        </EntityType>
+        <EntityType Name="TipoUsuarios">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo_usuario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__TipoUs__3E52440B" FromRole="TipoUsuarios" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Universidades">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="universidad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DatosAcademicos" Relationship="Self.FK__DatosAcad__Unive__35BCFE0A" FromRole="Universidades" ToRole="DatosAcademicos" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dui" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="direccion_be" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_nacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="contraseña" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoUsuarios" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Becarios" Relationship="Self.FK__Becarios__Usuari__32E0915F" FromRole="Usuarios" ToRole="Becarios" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Empleados__Usuar__38996AB5" FromRole="Usuarios" ToRole="Empleados" />
+          <NavigationProperty Name="TipoUsuarios1" Relationship="Self.FK__Usuarios__TipoUs__3E52440B" FromRole="Usuarios" ToRole="TipoUsuarios" />
+        </EntityType>
+        <Association Name="FK__Becarios__codigo__30F848ED">
+          <End Role="Programas" Type="Self.Programas" Multiplicity="1" />
+          <End Role="Becarios" Type="Self.Becarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Programas">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="Becarios">
+              <PropertyRef Name="codigo_programa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Becarios__DatosA__31EC6D26">
+          <End Role="DatosAcademicos" Type="Self.DatosAcademicos" Multiplicity="1" />
+          <End Role="Becarios" Type="Self.Becarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatosAcademicos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Becarios">
+              <PropertyRef Name="DatosAcademico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Becarios__Usuari__32E0915F">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Becarios" Type="Self.Becarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Becarios">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Notas__Becario__3A81B327">
+          <End Role="Becarios" Type="Self.Becarios" Multiplicity="1" />
+          <End Role="Notas" Type="Self.Notas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Becarios">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Notas">
+              <PropertyRef Name="Becario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Presupues__Becar__3C69FB99">
+          <End Role="Becarios" Type="Self.Becarios" Multiplicity="1" />
+          <End Role="Presupuestos" Type="Self.Presupuestos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Becarios">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Presupuestos">
+              <PropertyRef Name="Becario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosAcad__Carre__33D4B598">
+          <End Role="Carreras" Type="Self.Carreras" Multiplicity="1" />
+          <End Role="DatosAcademicos" Type="Self.DatosAcademicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carreras">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DatosAcademicos">
+              <PropertyRef Name="Carrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosAcad__Nivel__34C8D9D1">
+          <End Role="Niveles" Type="Self.Niveles" Multiplicity="1" />
+          <End Role="DatosAcademicos" Type="Self.DatosAcademicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Niveles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DatosAcademicos">
+              <PropertyRef Name="Nivel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DatosAcad__Unive__35BCFE0A">
+          <End Role="Universidades" Type="Self.Universidades" Multiplicity="1" />
+          <End Role="DatosAcademicos" Type="Self.DatosAcademicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Universidades">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DatosAcademicos">
+              <PropertyRef Name="Universidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Desembols__Presu__36B12243">
+          <End Role="Presupuestos" Type="Self.Presupuestos" Multiplicity="1" />
+          <End Role="Desembolsos" Type="Self.Desembolsos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presupuestos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Desembolsos">
+              <PropertyRef Name="Presupuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Desembols__TipoD__37A5467C">
+          <End Role="TipoDesembolso" Type="Self.TipoDesembolso" Multiplicity="1" />
+          <End Role="Desembolsos" Type="Self.Desembolsos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDesembolso">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Desembolsos">
+              <PropertyRef Name="TipoDesembolso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Empleados__Usuar__38996AB5">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Incidente__TipoI__398D8EEE">
+          <End Role="TipoIncidente" Type="Self.TipoIncidente" Multiplicity="1" />
+          <End Role="Incidentes" Type="Self.Incidentes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoIncidente">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Incidentes">
+              <PropertyRef Name="TipoIncidente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Notas__Materia__3B75D760">
+          <End Role="Materias" Type="Self.Materias" Multiplicity="1" />
+          <End Role="Notas" Type="Self.Notas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materias">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Notas">
+              <PropertyRef Name="Materia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__TipoUs__3E52440B">
+          <End Role="TipoUsuarios" Type="Self.TipoUsuarios" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuarios">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="TipoUsuarios" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BecasFedisalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Becarios" EntityType="Self.Becarios" />
+          <EntitySet Name="Carreras" EntityType="Self.Carreras" />
+          <EntitySet Name="Datos_Beca" EntityType="Self.Datos_Beca" />
+          <EntitySet Name="DatosAcademicos" EntityType="Self.DatosAcademicos" />
+          <EntitySet Name="Desembolsos" EntityType="Self.Desembolsos" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" />
+          <EntitySet Name="Estados" EntityType="Self.Estados" />
+          <EntitySet Name="Incidentes" EntityType="Self.Incidentes" />
+          <EntitySet Name="Materias" EntityType="Self.Materias" />
+          <EntitySet Name="Niveles" EntityType="Self.Niveles" />
+          <EntitySet Name="Notas" EntityType="Self.Notas" />
+          <EntitySet Name="Presupuestos" EntityType="Self.Presupuestos" />
+          <EntitySet Name="Programas" EntityType="Self.Programas" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TipoDesembolso" EntityType="Self.TipoDesembolso" />
+          <EntitySet Name="TipoIncidente" EntityType="Self.TipoIncidente" />
+          <EntitySet Name="TipoUsuarios" EntityType="Self.TipoUsuarios" />
+          <EntitySet Name="Universidades" EntityType="Self.Universidades" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <AssociationSet Name="FK__Becarios__codigo__30F848ED" Association="Self.FK__Becarios__codigo__30F848ED">
+            <End Role="Programas" EntitySet="Programas" />
+            <End Role="Becarios" EntitySet="Becarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Becarios__DatosA__31EC6D26" Association="Self.FK__Becarios__DatosA__31EC6D26">
+            <End Role="DatosAcademicos" EntitySet="DatosAcademicos" />
+            <End Role="Becarios" EntitySet="Becarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Becarios__Usuari__32E0915F" Association="Self.FK__Becarios__Usuari__32E0915F">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Becarios" EntitySet="Becarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Notas__Becario__3A81B327" Association="Self.FK__Notas__Becario__3A81B327">
+            <End Role="Becarios" EntitySet="Becarios" />
+            <End Role="Notas" EntitySet="Notas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Presupues__Becar__3C69FB99" Association="Self.FK__Presupues__Becar__3C69FB99">
+            <End Role="Becarios" EntitySet="Becarios" />
+            <End Role="Presupuestos" EntitySet="Presupuestos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosAcad__Carre__33D4B598" Association="Self.FK__DatosAcad__Carre__33D4B598">
+            <End Role="Carreras" EntitySet="Carreras" />
+            <End Role="DatosAcademicos" EntitySet="DatosAcademicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosAcad__Nivel__34C8D9D1" Association="Self.FK__DatosAcad__Nivel__34C8D9D1">
+            <End Role="Niveles" EntitySet="Niveles" />
+            <End Role="DatosAcademicos" EntitySet="DatosAcademicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DatosAcad__Unive__35BCFE0A" Association="Self.FK__DatosAcad__Unive__35BCFE0A">
+            <End Role="Universidades" EntitySet="Universidades" />
+            <End Role="DatosAcademicos" EntitySet="DatosAcademicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Desembols__Presu__36B12243" Association="Self.FK__Desembols__Presu__36B12243">
+            <End Role="Presupuestos" EntitySet="Presupuestos" />
+            <End Role="Desembolsos" EntitySet="Desembolsos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Desembols__TipoD__37A5467C" Association="Self.FK__Desembols__TipoD__37A5467C">
+            <End Role="TipoDesembolso" EntitySet="TipoDesembolso" />
+            <End Role="Desembolsos" EntitySet="Desembolsos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Empleados__Usuar__38996AB5" Association="Self.FK__Empleados__Usuar__38996AB5">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Incidente__TipoI__398D8EEE" Association="Self.FK__Incidente__TipoI__398D8EEE">
+            <End Role="TipoIncidente" EntitySet="TipoIncidente" />
+            <End Role="Incidentes" EntitySet="Incidentes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Notas__Materia__3B75D760" Association="Self.FK__Notas__Materia__3B75D760">
+            <End Role="Materias" EntitySet="Materias" />
+            <End Role="Notas" EntitySet="Notas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__TipoUs__3E52440B" Association="Self.FK__Usuarios__TipoUs__3E52440B">
+            <End Role="TipoUsuarios" EntitySet="TipoUsuarios" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BecasFedisalModelStoreContainer" CdmEntityContainer="BecasFedisalEntities">
+          <EntitySetMapping Name="Becarios">
+            <EntityTypeMapping TypeName="BecasFedisalModel.Becarios">
+              <MappingFragment StoreEntitySet="Becarios">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="codigo_programa" ColumnName="codigo_programa" />
+                <ScalarProperty Name="codigo_becario" ColumnName="codigo_becario" />
+                <ScalarProperty Name="DatosAcademico" ColumnName="DatosAcademico" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carreras">
+            <EntityTypeMapping TypeName="BecasFedisalModel.Carreras">
+              <MappingFragment StoreEntitySet="Carreras">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="carrera" ColumnName="carrera" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Datos_Beca">
+            <EntityTypeMapping TypeName="BecasFedisalModel.Datos_Beca">
+              <MappingFragment StoreEntitySet="Datos_Beca">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="total_inicial" ColumnName="total_inicial" />
+                <ScalarProperty Name="ejecutado" ColumnName="ejecutado" />
+                <ScalarProperty Name="sin_ejecutar" ColumnName="sin_ejecutar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DatosAcademicos">
+            <EntityTypeMapping TypeName="BecasFedisalModel.DatosAcademicos">
+              <MappingFragment StoreEntitySet="DatosAcademicos">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+                <ScalarProperty Name="Universidad" ColumnName="Universidad" />
+                <ScalarProperty Name="Carrera" ColumnName="Carrera" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_finalizacion" ColumnName="fecha_finalizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Desembolsos">
+            <EntityTypeMapping TypeName="BecasFedisalModel.Desembolsos">
+              <MappingFragment StoreEntitySet="Desembolsos">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TipoDesembolso" ColumnName="TipoDesembolso" />
+                <ScalarProperty Name="monto_desembolso" ColumnName="monto_desembolso" />
+                <ScalarProperty Name="fecha_desembolso" ColumnName="fecha_desembolso" />
+                <ScalarProperty Name="Presupuesto" ColumnName="Presupuesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="BecasFedisalModel.Empleados">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estados">
+            <EntityTypeMapping TypeName="BecasFedisalModel.Estados">
+              <MappingFragment StoreEntitySet="Estados">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="nombre_estado" ColumnName="nombre_estado" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Incidentes">
+            <EntityTypeMapping TypeName="BecasFedisalModel.Incidentes">
+              <MappingFragment StoreEntitySet="Incidentes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TipoIncidente" ColumnName="TipoIncidente" />
+                <ScalarProperty Name="detalle" ColumnName="detalle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materias">
+            <EntityTypeMapping TypeName="BecasFedisalModel.Materias">
+              <MappingFragment StoreEntitySet="Materias">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="nombre_materia" ColumnName="nombre_materia" />
+                <ScalarProperty Name="uv_materia" ColumnName="uv_materia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Niveles">
+            <EntityTypeMapping TypeName="BecasFedisalModel.Niveles">
+              <MappingFragment StoreEntitySet="Niveles">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="nivel_educativo" ColumnName="nivel_educativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notas">
+            <EntityTypeMapping TypeName="BecasFedisalModel.Notas">
+              <MappingFragment StoreEntitySet="Notas">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Materia" ColumnName="Materia" />
+                <ScalarProperty Name="nota" ColumnName="nota" />
+                <ScalarProperty Name="Ciclo" ColumnName="Ciclo" />
+                <ScalarProperty Name="tercio_superior" ColumnName="tercio_superior" />
+                <ScalarProperty Name="Becario" ColumnName="Becario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Presupuestos">
+            <EntityTypeMapping TypeName="BecasFedisalModel.Presupuestos">
+              <MappingFragment StoreEntitySet="Presupuestos">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="libros" ColumnName="libros" />
+                <ScalarProperty Name="colegiatura" ColumnName="colegiatura" />
+                <ScalarProperty Name="manutencion" ColumnName="manutencion" />
+                <ScalarProperty Name="matricula" ColumnName="matricula" />
+                <ScalarProperty Name="aranceles" ColumnName="aranceles" />
+                <ScalarProperty Name="seguro" ColumnName="seguro" />
+                <ScalarProperty Name="trabajo_graduacion" ColumnName="trabajo_graduacion" />
+                <ScalarProperty Name="Becario" ColumnName="Becario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Programas">
+            <EntityTypeMapping TypeName="BecasFedisalModel.Programas">
+              <MappingFragment StoreEntitySet="Programas">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BecasFedisalModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDesembolso">
+            <EntityTypeMapping TypeName="BecasFedisalModel.TipoDesembolso">
+              <MappingFragment StoreEntitySet="TipoDesembolso">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="tipo_desembolso" ColumnName="tipo_desembolso" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoIncidente">
+            <EntityTypeMapping TypeName="BecasFedisalModel.TipoIncidente">
+              <MappingFragment StoreEntitySet="TipoIncidente">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="tipo_incidente" ColumnName="tipo_incidente" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoUsuarios">
+            <EntityTypeMapping TypeName="BecasFedisalModel.TipoUsuarios">
+              <MappingFragment StoreEntitySet="TipoUsuarios">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="tipo_usuario" ColumnName="tipo_usuario" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Universidades">
+            <EntityTypeMapping TypeName="BecasFedisalModel.Universidades">
+              <MappingFragment StoreEntitySet="Universidades">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="universidad" ColumnName="universidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="BecasFedisalModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="dui" ColumnName="dui" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="direccion_be" ColumnName="direccion_be" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="TipoUsuarios" ColumnName="TipoUsuarios" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -12,7 +12,7 @@
 <body>
     <form id="form1" runat="server">
         <input id="txtAccion" runat="server" type="hidden" />
-        <asp:SqlDataSource ID="sqlUsuarios" runat="server" ConnectionString="<%$ ConnectionStrings:BecasFedisalConnectionString %>" DeleteCommand="DELETE FROM [Usuarios] WHERE [ID] = @ID" InsertCommand="INSERT INTO [Usuarios] ([Nombres], [Apellidos], [dui], [telefono], [correo], [direccion_be], [fecha_nacimiento], [contraseña], [TipoUsuarios], [Estado]) VALUES (@Nombres, @Apellidos, @dui, @telefono, @correo, @direccion_be, @fecha_nacimiento, @contraseña, @TipoUsuarios, @Estado)" SelectCommand="SELECT Usuarios.ID, CONCAT(Usuarios.Nombres, ' ', Usuarios.Apellidos) AS [Nombre completo], TipoUsuarios.tipo_usuario, CASE WHEN Usuarios.Estado = 1 THEN 'Activo' ELSE 'Inactivo' END AS [Estado] FROM Usuarios INNER JOIN TipoUsuarios ON Usuarios.TipoUsuarios = TipoUsuarios.ID" UpdateCommand="UPDATE [Usuarios] SET [Nombres] = @Nombres, [Apellidos] = @Apellidos, [dui] = @dui, [telefono] = @telefono, [correo] = @correo, [direccion_be] = @direccion_be, [fecha_nacimiento] = @fecha_nacimiento, [TipoUsuarios] = @TipoUsuarios, [Estado] = @Estado WHERE [ID] = @ID">
+        <asp:SqlDataSource ID="sqlUsuarios" runat="server" ConnectionString="<%$ ConnectionStrings:BecasFedisalConnectionString %>" DeleteCommand="DELETE FROM [Usuarios] WHERE [ID] = @ID" InsertCommand="INSERT INTO [Usuarios] ([Nombres], [Apellidos], [dui], [telefono], [correo], [direccion_be], [fecha_nacimiento], [contraseña], [TipoUsuarios], [Estado]) VALUES (@Nombres, @Apellidos, @dui, @telefono, @correo, @direccion_be, @fecha_nacimiento, @contraseña, @TipoUsuarios, @Estado)" SelectCommand="SELECT Usuarios.ID, CONCAT(Usuarios.Nombres, ' ', Usuarios.Apellidos) AS [Nombre completo], TipoUsuarios.tipo_usuario, CASE WHEN Usuarios.Estado = 1 THEN 'Activo' ELSE 'Inactivo' END AS [Estado] FROM Usuarios INNER JOIN TipoUsuarios ON Usuarios.TipoUsuarios = TipoUsuarios.ID WHERE (TipoUsuarios.ID in (1, 2)) AND (TipoUsuarios.ID = @tipo OR @tipo = 0) AND (CONCAT(Usuarios.Nombres, ' ', Usuarios.Apellidos) like '%' + @nombre +'%') AND (Usuarios.Estado = @estado OR @estado = -1)" UpdateCommand="UPDATE [Usuarios] SET [Nombres] = @Nombres, [Apellidos] = @Apellidos, [dui] = @dui, [telefono] = @telefono, [correo] = @correo, [direccion_be] = @direccion_be, [fecha_nacimiento] = @fecha_nacimiento, [TipoUsuarios] = @TipoUsuarios, [Estado] = @Estado WHERE [ID] = @ID">
             <DeleteParameters>
                 <asp:Parameter Name="ID" Type="Int32" />
             </DeleteParameters>
@@ -28,6 +28,11 @@
                 <asp:Parameter Name="TipoUsuarios" Type="Int32" />
                 <asp:Parameter Name="Estado" Type="Int32" />
             </InsertParameters>
+            <SelectParameters>
+                <asp:ControlParameter ControlID="ddlFiltrarTipo" Name="tipo" PropertyName="SelectedValue" />
+                <asp:ControlParameter ControlID="txtFiltroNombre" DefaultValue="%" Name="nombre" PropertyName="Text" />
+                <asp:ControlParameter ControlID="ddlFiltrarEstado" DefaultValue="" Name="estado" PropertyName="SelectedValue" />
+            </SelectParameters>
             <UpdateParameters>
                 <asp:Parameter Name="Nombres" Type="String" />
                 <asp:Parameter Name="Apellidos" Type="String" />
@@ -58,23 +63,23 @@
                 <ul class="navbar-nav mr-auto">
                     
                     <li class="nav-item active">
-                        <a class="nav-link" href="/Administrador/Usuarios.aspx">Usuarios</a>
+                        <a class="nav-link" href="/Administracion/Usuarios">Usuarios</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/Administrador/Becas.aspx">Programas de becas</a>
+                        <a class="nav-link" href="/Administracion/Becas">Programas de becas</a>
                     </li>
               
                     <li class="nav-item">
-                        <a class="nav-link" href="/Administrador/Universidades.aspx">Universidades</a>
+                        <a class="nav-link" href="/Administracion/Universidades">Universidades</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/Administrador/Carreras.aspx">Carreras</a>
+                        <a class="nav-link" href="/Administracion/Carreras">Carreras</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/Administrador/Niveles.aspx">Niveles de estudio</a>
+                        <a class="nav-link" href="/Administracion/Niveles_Educativos">Niveles de estudio</a>
                     </li>
 
                     <li class="nav-item d-block d-lg-none">
@@ -103,6 +108,31 @@
             
             </div>
         </nav>
+
+        <div class="container-fluid bg-dark d-flex justify-content-center">
+            <div class="form-inline my-2 w-50 d-flex justify-content-between">
+
+                <div class="form-group">
+                    <asp:TextBox AutoPostBack="true" CssClass="form-control my-0" ID="txtFiltroNombre" Text="" placeholder="Nombre" runat="server" />
+                </div>
+
+                <div class="form-group">
+                    <asp:DropDownList AutoPostBack="true" ID="ddlFiltrarTipo" runat="server" CssClass="form-control">
+                        <asp:ListItem Value="0">Todos los tipos</asp:ListItem>
+                        <asp:ListItem Value="1">Contador</asp:ListItem>
+                        <asp:ListItem Value="2">Gestor educativo</asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+
+                <div class="form-group">
+                    <asp:DropDownList AutoPostBack="true" ID="ddlFiltrarEstado" runat="server" CssClass="form-control">
+                        <asp:ListItem Value="-1">Todos los estados</asp:ListItem>
+                        <asp:ListItem Value="1">Activos</asp:ListItem>
+                        <asp:ListItem Value="0">Inactivos</asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+            </div>
+        </div>
 
         <section>
             <asp:ScriptManager ID="scrUsuario" runat="server"></asp:ScriptManager>
@@ -193,6 +223,9 @@
                     <asp:AsyncPostBackTrigger ControlID="tablaUsuario" EventName="SelectedIndexChanged" />
                     <asp:AsyncPostBackTrigger ControlID="btnModificar" EventName="Click" />
                     <asp:AsyncPostBackTrigger ControlID="btnNuevoUsuario" EventName="Click" />
+                    <asp:AsyncPostBackTrigger ControlID="txtFiltroNombre" EventName="TextChanged" />
+                    <asp:AsyncPostBackTrigger ControlID="ddlFiltrarTipo" EventName="SelectedIndexChanged" />
+                    <asp:AsyncPostBackTrigger ControlID="ddlFiltrarEstado" EventName="SelectedIndexChanged" />
                 </Triggers>
             </asp:UpdatePanel>
         </section>

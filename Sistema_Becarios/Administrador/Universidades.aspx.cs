@@ -9,7 +9,8 @@ public partial class Administrador_Universidades : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        // En caso de que la seccion no esta abierta
+        if (Session["usuario"] == null) Response.Redirect("/login");
     }
 
     protected void tablaUniversidad_PreRender(object sender, EventArgs e)

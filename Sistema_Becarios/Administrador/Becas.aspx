@@ -42,23 +42,23 @@
                 <ul class="navbar-nav mr-auto">
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="/Administrador/Usuarios.aspx">Usuarios</a>
+                        <a class="nav-link" href="/Administracion/Usuarios">Usuarios</a>
                     </li>
 
                     <li class="nav-item active">
-                        <a class="nav-link" href="/Administrador/Becas.aspx">Programas de becas</a>
+                        <a class="nav-link" href="/Administracion/Becas">Programas de becas</a>
                     </li>
               
                     <li class="nav-item">
-                        <a class="nav-link" href="/Administrador/Universidades.aspx">Universidades</a>
+                        <a class="nav-link" href="/Administracion/Universidades">Universidades</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/Administrador/Carreras.aspx">Carreras</a>
+                        <a class="nav-link" href="/Administracion/Carreras">Carreras</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/Administrador/Niveles.aspx">Niveles de estudio</a>
+                        <a class="nav-link" href="/Administracion/Niveles_Educativos">Niveles de estudio</a>
                     </li>
 
                     <li class="nav-item d-block d-lg-none">
@@ -66,7 +66,7 @@
                     </li>
 
                     <li class="nav-item d-block d-lg-none">
-                        <a class="nav-link" href="#">Cerrar secion</a>
+                        <asp:Label CssClass="nav-link text-dark" runat="server" Text="Cerrar secion" OnClick="btnCerrarSecion_Click" />
                     </li>
                 </ul>
 
@@ -78,7 +78,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="menuAjustes">
                                 <a class="dropdown-item" href="#">Cambiar clave</a>
-                                <a class="dropdown-item" href="#">Cerrar secion</a>
+                                <asp:Button style="background-color:transparent; border:none; cursor: pointer;" CssClass="text-dark text-center w-100 nav-link" runat="server" Text="Cerrar secion" OnClick="btnCerrarSecion_Click" />
                             </div>                           
                         </li>
                     </ul>
