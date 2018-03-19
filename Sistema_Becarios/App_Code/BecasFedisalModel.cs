@@ -199,15 +199,6 @@ public partial class Programas
     public virtual ICollection<Becarios> Becarios { get; set; }
 }
 
-public partial class sysdiagrams
-{
-    public string name { get; set; }
-    public int principal_id { get; set; }
-    public int diagram_id { get; set; }
-    public Nullable<int> version { get; set; }
-    public byte[] definition { get; set; }
-}
-
 public partial class TipoDesembolso
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -288,9 +279,9 @@ public partial class Usuarios
     public string direccion_be { get; set; }
     public string correo { get; set; }
     public System.DateTime fecha_nacimiento { get; set; }
-    public string contraseña { get; set; }
     public int TipoUsuarios { get; set; }
     public int Estado { get; set; }
+    public string contraseña { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
     public virtual ICollection<Becarios> Becarios { get; set; }

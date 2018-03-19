@@ -36,7 +36,6 @@ public partial class BecasFedisalEntities : DbContext
     public virtual DbSet<Notas> Notas { get; set; }
     public virtual DbSet<Presupuestos> Presupuestos { get; set; }
     public virtual DbSet<Programas> Programas { get; set; }
-    public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     public virtual DbSet<TipoDesembolso> TipoDesembolso { get; set; }
     public virtual DbSet<TipoIncidente> TipoIncidente { get; set; }
     public virtual DbSet<TipoUsuarios> TipoUsuarios { get; set; }

@@ -11,11 +11,16 @@ using System.Data.SqlClient;
 
 public partial class Administrador_Usuarios : System.Web.UI.Page
 {
+    Usuarios usuario;
 
     protected void Page_Load(object sender, EventArgs e)
     {
         // En caso de que la seccion no esta abierta
         if (Session["usuario"] == null) Response.Redirect("/login");
+
+        this.usuario = (Usuarios)Session["usuario"];
+
+        this.sqlUsuarios.SelectParameters["id"].DefaultValue = this.usuario.ID.ToString();
 
         // Obtenemos la fecha actual del servidor
         this._clientScript.InnerHtml = "<script>$('#txtFechaActual').val('" + DateTime.Today.ToString("yyyy-MM-dd") + "').change();</script>";

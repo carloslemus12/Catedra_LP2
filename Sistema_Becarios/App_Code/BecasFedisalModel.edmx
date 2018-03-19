@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BecasFedisalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BecasFedisalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Becarios">
           <Key>
             <PropertyRef Name="ID" />
@@ -124,16 +124,6 @@
           <Property Name="codigo" Type="char" MaxLength="4" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="TipoDesembolso">
           <Key>
             <PropertyRef Name="ID" />
@@ -177,7 +167,7 @@
           <Property Name="direccion_be" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="correo" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="fecha_nacimiento" Type="date" Nullable="false" />
-          <Property Name="contraseña" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="contraseña" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="TipoUsuarios" Type="int" Nullable="false" />
           <Property Name="Estado" Type="int" Nullable="false" />
         </EntityType>
@@ -337,7 +327,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Usuarios__TipoUs__3E52440B">
+        <Association Name="FK__Usuarios__TipoUs__3D5E1FD2">
           <End Role="TipoUsuarios" Type="Self.TipoUsuarios" Multiplicity="1" />
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
           <ReferentialConstraint>
@@ -363,7 +353,6 @@
           <EntitySet Name="Notas" EntityType="Self.Notas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Presupuestos" EntityType="Self.Presupuestos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Programas" EntityType="Self.Programas" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoDesembolso" EntityType="Self.TipoDesembolso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoIncidente" EntityType="Self.TipoIncidente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoUsuarios" EntityType="Self.TipoUsuarios" Schema="dbo" store:Type="Tables" />
@@ -421,13 +410,12 @@
             <End Role="Becarios" EntitySet="Becarios" />
             <End Role="Presupuestos" EntitySet="Presupuestos" />
           </AssociationSet>
-          <AssociationSet Name="FK__Usuarios__TipoUs__3E52440B" Association="Self.FK__Usuarios__TipoUs__3E52440B">
+          <AssociationSet Name="FK__Usuarios__TipoUs__3D5E1FD2" Association="Self.FK__Usuarios__TipoUs__3D5E1FD2">
             <End Role="TipoUsuarios" EntitySet="TipoUsuarios" />
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BecasFedisalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -571,16 +559,6 @@
           <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Becarios" Relationship="Self.FK__Becarios__codigo__30F848ED" FromRole="Programas" ToRole="Becarios" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="TipoDesembolso">
           <Key>
             <PropertyRef Name="ID" />
@@ -628,12 +606,12 @@
           <Property Name="direccion_be" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="correo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fecha_nacimiento" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="contraseña" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TipoUsuarios" Type="Int32" Nullable="false" />
           <Property Name="Estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Becarios" Relationship="Self.FK__Becarios__Usuari__32E0915F" FromRole="Usuarios" ToRole="Becarios" />
           <NavigationProperty Name="Empleados" Relationship="Self.FK__Empleados__Usuar__38996AB5" FromRole="Usuarios" ToRole="Empleados" />
           <NavigationProperty Name="TipoUsuarios1" Relationship="Self.FK__Usuarios__TipoUs__3E52440B" FromRole="Usuarios" ToRole="TipoUsuarios" />
+          <Property Name="contraseña" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="FK__Becarios__codigo__30F848ED">
           <End Role="Programas" Type="Self.Programas" Multiplicity="1" />
@@ -817,7 +795,6 @@
           <EntitySet Name="Notas" EntityType="Self.Notas" />
           <EntitySet Name="Presupuestos" EntityType="Self.Presupuestos" />
           <EntitySet Name="Programas" EntityType="Self.Programas" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TipoDesembolso" EntityType="Self.TipoDesembolso" />
           <EntitySet Name="TipoIncidente" EntityType="Self.TipoIncidente" />
           <EntitySet Name="TipoUsuarios" EntityType="Self.TipoUsuarios" />
@@ -1018,17 +995,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="BecasFedisalModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TipoDesembolso">
             <EntityTypeMapping TypeName="BecasFedisalModel.TipoDesembolso">
               <MappingFragment StoreEntitySet="TipoDesembolso">
@@ -1067,6 +1033,7 @@
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="BecasFedisalModel.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Nombres" ColumnName="Nombres" />
                 <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
@@ -1075,7 +1042,6 @@
                 <ScalarProperty Name="direccion_be" ColumnName="direccion_be" />
                 <ScalarProperty Name="correo" ColumnName="correo" />
                 <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
-                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
                 <ScalarProperty Name="TipoUsuarios" ColumnName="TipoUsuarios" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
               </MappingFragment>

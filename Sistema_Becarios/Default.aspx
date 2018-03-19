@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="txtUsername">Nombre de usuario:</label>
+                        <label for="txtUsername">Correo electronico:</label>
                         <asp:TextBox CssClass="form-control" ID="txtUsername" runat="server" />
                         <asp:RequiredFieldValidator ControlToValidate="txtUsername" ErrorMessage="El nombre del usuario es obligatorio" runat="server" Display="Dynamic" CssClass="text-danger" />
                     </div>

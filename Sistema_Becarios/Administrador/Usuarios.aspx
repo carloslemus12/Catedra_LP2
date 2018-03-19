@@ -12,7 +12,7 @@
 <body>
     <form id="form1" runat="server">
         <input id="txtAccion" runat="server" type="hidden" />
-        <asp:SqlDataSource ID="sqlUsuarios" runat="server" ConnectionString="<%$ ConnectionStrings:BecasFedisalConnectionString %>" DeleteCommand="DELETE FROM [Usuarios] WHERE [ID] = @ID" InsertCommand="INSERT INTO [Usuarios] ([Nombres], [Apellidos], [dui], [telefono], [correo], [direccion_be], [fecha_nacimiento], [contraseña], [TipoUsuarios], [Estado]) VALUES (@Nombres, @Apellidos, @dui, @telefono, @correo, @direccion_be, @fecha_nacimiento, @contraseña, @TipoUsuarios, @Estado)" SelectCommand="SELECT Usuarios.ID, CONCAT(Usuarios.Nombres, ' ', Usuarios.Apellidos) AS [Nombre completo], TipoUsuarios.tipo_usuario, CASE WHEN Usuarios.Estado = 1 THEN 'Activo' ELSE 'Inactivo' END AS [Estado] FROM Usuarios INNER JOIN TipoUsuarios ON Usuarios.TipoUsuarios = TipoUsuarios.ID WHERE (TipoUsuarios.ID in (1, 2)) AND (TipoUsuarios.ID = @tipo OR @tipo = 0) AND (CONCAT(Usuarios.Nombres, ' ', Usuarios.Apellidos) like '%' + @nombre +'%') AND (Usuarios.Estado = @estado OR @estado = -1)" UpdateCommand="UPDATE [Usuarios] SET [Nombres] = @Nombres, [Apellidos] = @Apellidos, [dui] = @dui, [telefono] = @telefono, [correo] = @correo, [direccion_be] = @direccion_be, [fecha_nacimiento] = @fecha_nacimiento, [TipoUsuarios] = @TipoUsuarios, [Estado] = @Estado WHERE [ID] = @ID">
+        <asp:SqlDataSource ID="sqlUsuarios" runat="server" ConnectionString="<%$ ConnectionStrings:BecasFedisalConnectionString %>" DeleteCommand="DELETE FROM [Usuarios] WHERE [ID] = @ID" InsertCommand="INSERT INTO [Usuarios] ([Nombres], [Apellidos], [dui], [telefono], [correo], [direccion_be], [fecha_nacimiento], [contraseña], [TipoUsuarios], [Estado]) VALUES (@Nombres, @Apellidos, @dui, @telefono, @correo, @direccion_be, @fecha_nacimiento, @contraseña, @TipoUsuarios, @Estado)" SelectCommand="SELECT Usuarios.ID, CONCAT(Usuarios.Nombres, ' ', Usuarios.Apellidos) AS [Nombre completo], TipoUsuarios.tipo_usuario, CASE WHEN Usuarios.Estado = 1 THEN 'Activo' ELSE 'Inactivo' END AS [Estado] FROM Usuarios INNER JOIN TipoUsuarios ON Usuarios.TipoUsuarios = TipoUsuarios.ID WHERE (TipoUsuarios.ID in (1, 2)) AND (TipoUsuarios.ID = @tipo OR @tipo = 0) AND (CONCAT(Usuarios.Nombres, ' ', Usuarios.Apellidos) like '%' + @nombre +'%') AND (Usuarios.Estado = @estado OR @estado = -1) AND Usuarios.ID != @id" UpdateCommand="UPDATE [Usuarios] SET [Nombres] = @Nombres, [Apellidos] = @Apellidos, [dui] = @dui, [telefono] = @telefono, [correo] = @correo, [direccion_be] = @direccion_be, [fecha_nacimiento] = @fecha_nacimiento, [TipoUsuarios] = @TipoUsuarios, [Estado] = @Estado WHERE [ID] = @ID">
             <DeleteParameters>
                 <asp:Parameter Name="ID" Type="Int32" />
             </DeleteParameters>
@@ -32,6 +32,7 @@
                 <asp:ControlParameter ControlID="ddlFiltrarTipo" Name="tipo" PropertyName="SelectedValue" />
                 <asp:ControlParameter ControlID="txtFiltroNombre" DefaultValue="%" Name="nombre" PropertyName="Text" />
                 <asp:ControlParameter ControlID="ddlFiltrarEstado" DefaultValue="" Name="estado" PropertyName="SelectedValue" />
+                <asp:Parameter Name="id" />
             </SelectParameters>
             <UpdateParameters>
                 <asp:Parameter Name="Nombres" Type="String" />
@@ -222,7 +223,6 @@
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="tablaUsuario" EventName="SelectedIndexChanged" />
                     <asp:AsyncPostBackTrigger ControlID="btnModificar" EventName="Click" />
-                    <asp:AsyncPostBackTrigger ControlID="btnNuevoUsuario" EventName="Click" />
                     <asp:AsyncPostBackTrigger ControlID="txtFiltroNombre" EventName="TextChanged" />
                     <asp:AsyncPostBackTrigger ControlID="ddlFiltrarTipo" EventName="SelectedIndexChanged" />
                     <asp:AsyncPostBackTrigger ControlID="ddlFiltrarEstado" EventName="SelectedIndexChanged" />
@@ -390,7 +390,7 @@
                                     <button id="btnModClaveAleatoria" type="button" class="input-group-text btn btn-danger"><i id="contenidoIcon" class="material-icons">remove_red_eye</i></button>
                                 </div>
 
-                                <asp:TextBox CssClass="form-control" ID="txtModificarClave" TextMode="Password" runat="server" ValidationGroup="nuevoUsuario" placeholder="Clave"/>
+                                <asp:TextBox CssClass="form-control" ID="txtModificarClave" TextMode="Password" runat="server" ValidationGroup="nuevoUsuario" placeholder="Clave" ReadOnly="true"/>
                             </div>
 
                             <asp:RequiredFieldValidator ControlToValidate="txtModificarClave" ValidationGroup="modificarUsuario" Display="Dynamic" runat="server" ErrorMessage="La clave es obligatorio" CssClass="blockquote-footer text-danger"/>
