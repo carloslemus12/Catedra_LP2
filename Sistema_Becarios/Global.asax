@@ -44,6 +44,7 @@
         routes.MapPageRoute("niveles", "Administracion/Niveles_Educativos", "~/Administrador/Niveles.aspx");
         routes.MapPageRoute("universidades", "Administracion/Universidades", "~/Administrador/Universidades.aspx");
         routes.MapPageRoute("usuarios", "Administracion/Usuarios", "~/Administrador/Usuarios.aspx");
+        routes.MapPageRoute("clave", "Clave", "~/CambiarClave.aspx");
     }
 
 </script>

@@ -84,11 +84,11 @@
                     </li>
 
                     <li class="nav-item d-block d-lg-none">
-                        <a class="nav-link" href="#">Cambiar clave</a>
+                        <a class="nav-link" href="/Clave">Cambiar clave</a>
                     </li>
 
                     <li class="nav-item d-block d-lg-none">
-                        <a class="nav-link" href="#">Cerrar secion</a>
+                        <asp:Button style="background-color:transparent; border:none; cursor: pointer;" CssClass="text-secundary text-left w-100 nav-link" runat="server" Text="Cerrar secion" OnClick="btnCerrarSecion_Click" />
                     </li>
                 </ul>
 
@@ -99,8 +99,8 @@
                         
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="menuAjustes">
-                                <a class="dropdown-item" href="#">Cambiar clave</a>
-                                <a class="dropdown-item" href="#">Cerrar secion</a>
+                                <a class="dropdown-item" href="/Clave">Cambiar clave</a>
+                                <asp:Button style="background-color:transparent; border:none; cursor: pointer;" CssClass="text-dark text-center w-100 nav-link" runat="server" Text="Cerrar secion" OnClick="btnCerrarSecion_Click" />
                             </div>                           
                         </li>
                     </ul>

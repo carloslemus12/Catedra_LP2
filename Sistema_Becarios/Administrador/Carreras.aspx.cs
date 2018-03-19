@@ -10,7 +10,18 @@ public partial class Administrador_Carreras : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         // En caso de que la seccion no esta abierta
-        if (Session["usuario"] == null) Response.Redirect("/login");
+        if (Session["usuario"] == null)
+            Response.Redirect("/login");
+        else
+        {
+            Usuarios usuario = (Usuarios)Session["usuario"];
+
+            if (usuario.TipoUsuarios != 3)
+            {
+                Session.Abandon();
+                Response.Redirect("/login");
+            }
+        }
     }
 
     protected void tablaCarrera_PreRender(object sender, EventArgs e)
@@ -85,5 +96,11 @@ public partial class Administrador_Carreras : System.Web.UI.Page
         {
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert", "alert('Error al modificar la carrera');", true);
         }
+    }
+
+    protected void btnCerrarSecion_Click(object sender, EventArgs e)
+    {
+        Session.Abandon();
+        Response.Redirect("/login");
     }
 }

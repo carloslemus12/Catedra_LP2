@@ -16,7 +16,18 @@ public partial class Administrador_Usuarios : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         // En caso de que la seccion no esta abierta
-        if (Session["usuario"] == null) Response.Redirect("/login");
+        if (Session["usuario"] == null)
+            Response.Redirect("/login");
+        else
+        {
+            Usuarios usuario = (Usuarios)Session["usuario"];
+
+            if (usuario.TipoUsuarios != 3)
+            {
+                Session.Abandon();
+                Response.Redirect("/login");
+            }
+        }
 
         this.usuario = (Usuarios)Session["usuario"];
 
@@ -226,5 +237,11 @@ public partial class Administrador_Usuarios : System.Web.UI.Page
             this.txtModificarClave.Text = "";
             this.ddlModificarTipo.SelectedValue = "1";
         }
+    }
+
+    protected void btnCerrarSecion_Click(object sender, EventArgs e)
+    {
+        Session.Abandon();
+        Response.Redirect("/login");
     }
 }

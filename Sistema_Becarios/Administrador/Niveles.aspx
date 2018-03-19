@@ -61,11 +61,11 @@
                     </li>
 
                     <li class="nav-item d-block d-lg-none">
-                        <a class="nav-link" href="#">Cambiar clave</a>
+                        <a class="nav-link" href="/Clave">Cambiar clave</a>
                     </li>
 
                     <li class="nav-item d-block d-lg-none">
-                        <a class="nav-link" href="#">Cerrar secion</a>
+                        <asp:Button style="background-color:transparent; border:none; cursor: pointer;" CssClass="text-secundary text-left w-100 nav-link" runat="server" Text="Cerrar secion" OnClick="btnCerrarSecion_Click" />
                     </li>
                 </ul>
 
@@ -76,8 +76,8 @@
                         
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="menuAjustes">
-                                <a class="dropdown-item" href="#">Cambiar clave</a>
-                                <a class="dropdown-item" href="#">Cerrar secion</a>
+                                <a class="dropdown-item" href="/Clave">Cambiar clave</a>
+                                <asp:Button style="background-color:transparent; border:none; cursor: pointer;" CssClass="text-dark text-center w-100 nav-link" runat="server" Text="Cerrar secion" OnClick="btnCerrarSecion_Click" />
                             </div>                           
                         </li>
                     </ul>
@@ -91,10 +91,9 @@
             <div class="form-inline my-2">
 
                 <div class="form-group">
-                    <asp:TextBox CssClass="form-control my-0" ID="txtNombreFiltro" Text="" runat="server" />
+                    <asp:TextBox AutoPostBack="true" CssClass="form-control my-0" ID="txtNombreFiltro" Text="" runat="server" />
                 </div>
 
-                <button type="submit" class="btn btn-danger ml-2 my-0" id="btnFiltrar" runat="server">Filtrar</button>
             </div>
         </div>
 
@@ -114,15 +113,22 @@
 
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
-                <asp:GridView ID="tablaNiveles" CssClass="mt-3 table table-dark table-hover text-center" runat="server" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="sqlNiveles" OnPreRender="tablaNiveles_PreRender" OnRowCreated="tablaNiveles_RowCreated" OnSelectedIndexChanged="tablaNiveles_SelectedIndexChanged">
-                    <Columns>
-                        <asp:BoundField DataField="ID" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="ID" Visible="False" />
-                        <asp:BoundField DataField="nivel_educativo" HeaderText="Nivel educativo" SortExpression="nivel_educativo" />
-                        <asp:CommandField ButtonType="Image" HeaderText="Opciones" SelectImageUrl="~/img/update.png" ShowSelectButton="True" />
-                        <asp:CommandField ButtonType="Image" DeleteImageUrl="~/img/delete.png" ShowDeleteButton="True" />
-                    </Columns>
-                </asp:GridView>
+                <div class='d-flex justify-content-center w-100'>
+                    <div class="w-75">
+                        <asp:GridView ID="tablaNiveles" CssClass="mt-3 table table-dark table-hover text-center" runat="server" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="sqlNiveles" OnPreRender="tablaNiveles_PreRender" OnRowCreated="tablaNiveles_RowCreated" OnSelectedIndexChanged="tablaNiveles_SelectedIndexChanged">
+                            <Columns>
+                                <asp:BoundField DataField="ID" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="ID" Visible="False" />
+                                <asp:BoundField DataField="nivel_educativo" HeaderText="Nivel educativo" SortExpression="nivel_educativo" />
+                                <asp:CommandField ButtonType="Image" HeaderText="Opciones" SelectImageUrl="~/img/update.png" ShowSelectButton="True" />
+                                <asp:CommandField ButtonType="Image" DeleteImageUrl="~/img/delete.png" ShowDeleteButton="True" />
+                            </Columns>
+                        </asp:GridView>
+                    </div>
+                </div>
             </ContentTemplate>
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="txtNombreFiltro" EventName="TextChanged" />
+            </Triggers>
         </asp:UpdatePanel>
 
         <div class="modal fade" id="modalNuevoNivel" tabindex="-1" role="dialog" aria-hidden="true">

@@ -19,7 +19,17 @@ public partial class Administrador : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         // En caso de que la seccion no esta abierta
-        if (Session["usuario"] == null) Response.Redirect("/login");
+        if (Session["usuario"] == null)
+            Response.Redirect("/login");
+        else {
+            Usuarios usuario = (Usuarios)Session["usuario"];
+
+            if (usuario.TipoUsuarios != 3)
+            {
+                Session.Abandon();
+                Response.Redirect("/login");
+            }
+        }
 
         string codFiltro = "%", nombreFiltro = "%";
         // Obtenemos los datos del indice
@@ -302,7 +312,7 @@ public partial class Administrador : System.Web.UI.Page
         Response.Redirect(this.urlNext + this.cod + this.nombre);
     }
     
-    protected void btnFiltrar_Click(object sender, EventArgs e)
+    protected void filtrar()
     {
         this.cod = this.txtCodigoFiltro.Text.Trim();
 
@@ -327,5 +337,15 @@ public partial class Administrador : System.Web.UI.Page
     {
         Session.Abandon();
         Response.Redirect("/login");
+    }
+
+    protected void txtCodigoFiltro_TextChanged(object sender, EventArgs e)
+    {
+        filtrar();
+    }
+
+    protected void txtNombreFiltro_TextChanged(object sender, EventArgs e)
+    {
+        filtrar();
     }
 }

@@ -62,11 +62,11 @@
                     </li>
 
                     <li class="nav-item d-block d-lg-none">
-                        <a class="nav-link" href="#">Cambiar clave</a>
+                        <a class="nav-link" href="/Clave">Cambiar clave</a>
                     </li>
 
                     <li class="nav-item d-block d-lg-none">
-                        <asp:Label CssClass="nav-link text-dark" runat="server" Text="Cerrar secion" OnClick="btnCerrarSecion_Click" />
+                        <asp:Button style="background-color:transparent; border:none; cursor: pointer;" CssClass="text-secundary text-left w-100 nav-link" runat="server" Text="Cerrar secion" OnClick="btnCerrarSecion_Click" />
                     </li>
                 </ul>
 
@@ -77,7 +77,7 @@
                         
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="menuAjustes">
-                                <a class="dropdown-item" href="#">Cambiar clave</a>
+                                <a class="dropdown-item" href="/Clave">Cambiar clave</a>
                                 <asp:Button style="background-color:transparent; border:none; cursor: pointer;" CssClass="text-dark text-center w-100 nav-link" runat="server" Text="Cerrar secion" OnClick="btnCerrarSecion_Click" />
                             </div>                           
                         </li>
@@ -92,14 +92,13 @@
             <div class="form-inline my-2">
 
                 <div class="form-group">
-                    <asp:TextBox CssClass="form-control my-0" ID="txtCodigoFiltro" Text="" placeholder="Codigo" runat="server" />
+                    <asp:TextBox AutoPostBack="true" CssClass="form-control my-0" ID="txtCodigoFiltro" Text="" placeholder="Codigo" runat="server" OnTextChanged="txtCodigoFiltro_TextChanged" />
                 </div>
 
                 <div class="form-group">
-                    <asp:TextBox CssClass="form-control my-0 ml-2" ID="txtNombreFiltro" Text="" placeholder="Programa" runat="server" />
+                    <asp:TextBox AutoPostBack="true" CssClass="form-control my-0 ml-lg-2" ID="txtNombreFiltro" Text="" placeholder="Programa" runat="server" OnTextChanged="txtNombreFiltro_TextChanged" />
                 </div>
 
-                <asp:Button CssClass="btn btn-danger ml-2 my-0" ID="btnFiltrar" runat="server" Text="Filtrar" OnClick="btnFiltrar_Click" />
             </div>
         </div>
 
