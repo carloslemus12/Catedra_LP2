@@ -45,6 +45,9 @@
         routes.MapPageRoute("universidades", "Administracion/Universidades", "~/Administrador/Universidades.aspx");
         routes.MapPageRoute("usuarios", "Administracion/Usuarios", "~/Administrador/Usuarios.aspx");
         routes.MapPageRoute("clave", "Clave", "~/CambiarClave.aspx");
+        routes.MapPageRoute("contador", "Contador/Becarios", "~/Contador/Becarios.aspx");
+        routes.MapPageRoute("contador_becario", "Contador/Becario/{becario}", "~/Contador/becario.aspx");
+        routes.MapPageRoute("contador_becario_ciclos", "Contador/Becario/{becario}/Ciclo/{ciclo}", "~/Contador/Becario_ciclo.aspx");
     }
 
 </script>

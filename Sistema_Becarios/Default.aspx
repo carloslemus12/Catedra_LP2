@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Login</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/estilo_login.css" rel="stylesheet" />
 </head>

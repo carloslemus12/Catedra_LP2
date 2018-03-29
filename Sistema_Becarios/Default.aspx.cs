@@ -17,6 +17,10 @@ public partial class _Default : System.Web.UI.Page
             {
                 Response.Redirect("/Administracion/Becas");
             }
+            else if (usuario.TipoUsuarios == 1)
+            {
+                Response.Redirect("/Contador/Becarios");
+            }
         }
     }
 
@@ -36,7 +40,9 @@ public partial class _Default : System.Web.UI.Page
 
             if (usuario.TipoUsuarios == 3)
                 Response.Redirect("Administracion/Becas");
-            
+            if (usuario.TipoUsuarios == 1)
+                Response.Redirect("/Contador/Becarios");
+
         } else {
             this.divMsg.Attributes.Add("class", "alert alert-danger alert-dismissible fade show mb-0");
             this.spnMsg.InnerHtml = "La clave o la contraseña son incorrectas";
