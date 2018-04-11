@@ -48,6 +48,9 @@
         routes.MapPageRoute("contador", "Contador/Becarios", "~/Contador/Becarios.aspx");
         routes.MapPageRoute("contador_becario", "Contador/Becario/{becario}", "~/Contador/becario.aspx");
         routes.MapPageRoute("contador_becario_ciclos", "Contador/Becario/{becario}/Ciclo/{ciclo}", "~/Contador/Becario_ciclo.aspx");
+
+        routes.MapPageRoute("GestorEducativo_Becarios", "GestorEducativo/Becarios", "~/GestorEducativo/Becarios.aspx");
+        routes.MapPageRoute("GestorEducativo_Ciclos", "GestorEducativo/Ciclos", "~/GestorEducativo/Ciclos.aspx");
     }
 
 </script>

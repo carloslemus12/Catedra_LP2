@@ -21,15 +21,23 @@ public partial class CambiarClave : System.Web.UI.Page
 
     protected void btnCambiarClave_Click(object sender, EventArgs e)
     {
-        usuario.contraseña = this.txtPassword.Text.Trim();
-        BecasFedisalEntities becas = new BecasFedisalEntities();
+        if (usuario.contraseña.Equals(this.txtPasswordActual.Text.Trim()))
+        {
+            usuario.contraseña = this.txtPassword.Text.Trim();
+            BecasFedisalEntities becas = new BecasFedisalEntities();
 
-        //Obteniendo el tipo de cliente a modificar
-        Usuarios user = becas.Usuarios.Find(usuario.ID);
+            //Obteniendo el tipo de cliente a modificar
+            Usuarios user = becas.Usuarios.Find(usuario.ID);
 
-        //Actualizando el valor del objeto
-        becas.Entry(user).CurrentValues.SetValues(usuario);
+            //Actualizando el valor del objeto
+            becas.Entry(user).CurrentValues.SetValues(usuario);
 
-        becas.SaveChanges();
-        Response.Redirect("/login");    }
+            becas.SaveChanges();
+            Response.Redirect("/login");
+        }
+        else
+        {
+            this._clientScript.InnerHtml = "<script>alert('Error: las clave no es la corecta');</script>";
+        }
+    }
 }

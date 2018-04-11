@@ -15,23 +15,19 @@ public partial class Becarios
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
     public Becarios()
     {
-        this.Notas = new HashSet<Notas>();
-        this.Presupuestos = new HashSet<Presupuestos>();
+        this.DatosAcademicos = new HashSet<DatosAcademicos>();
     }
 
-    public string ID { get; set; }
+    public int ID { get; set; }
     public string codigo_programa { get; set; }
+    public string fecha_ingreso { get; set; }
     public string codigo_becario { get; set; }
-    public int DatosAcademico { get; set; }
     public int Usuario { get; set; }
 
     public virtual Programas Programas { get; set; }
-    public virtual DatosAcademicos DatosAcademicos { get; set; }
     public virtual Usuarios Usuarios { get; set; }
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    public virtual ICollection<Notas> Notas { get; set; }
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    public virtual ICollection<Presupuestos> Presupuestos { get; set; }
+    public virtual ICollection<DatosAcademicos> DatosAcademicos { get; set; }
 }
 
 public partial class Carreras
@@ -49,6 +45,28 @@ public partial class Carreras
     public virtual ICollection<DatosAcademicos> DatosAcademicos { get; set; }
 }
 
+public partial class Ciclos
+{
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public Ciclos()
+    {
+        this.Desembolsos = new HashSet<Desembolsos>();
+        this.Incidentes = new HashSet<Incidentes>();
+        this.Notas = new HashSet<Notas>();
+    }
+
+    public int ID { get; set; }
+    public int Datos_becario { get; set; }
+
+    public virtual DatosAcademicos DatosAcademicos { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<Desembolsos> Desembolsos { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<Incidentes> Incidentes { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<Notas> Notas { get; set; }
+}
+
 public partial class Datos_Beca
 {
     public int ID { get; set; }
@@ -62,7 +80,8 @@ public partial class DatosAcademicos
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
     public DatosAcademicos()
     {
-        this.Becarios = new HashSet<Becarios>();
+        this.Ciclos = new HashSet<Ciclos>();
+        this.Presupuestos = new HashSet<Presupuestos>();
     }
 
     public int ID { get; set; }
@@ -71,24 +90,28 @@ public partial class DatosAcademicos
     public int Carrera { get; set; }
     public System.DateTime fecha_inicio { get; set; }
     public System.DateTime fecha_finalizacion { get; set; }
+    public int Becario { get; set; }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    public virtual ICollection<Becarios> Becarios { get; set; }
+    public virtual Becarios Becarios { get; set; }
     public virtual Carreras Carreras { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<Ciclos> Ciclos { get; set; }
     public virtual Niveles Niveles { get; set; }
     public virtual Universidades Universidades { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<Presupuestos> Presupuestos { get; set; }
 }
 
 public partial class Desembolsos
 {
     public int ID { get; set; }
-    public int TipoDesembolso { get; set; }
+    public string TipoDesembolso { get; set; }
     public decimal monto_desembolso { get; set; }
     public System.DateTime fecha_desembolso { get; set; }
     public int Presupuesto { get; set; }
+    public int Ciclo { get; set; }
 
-    public virtual Presupuestos Presupuestos { get; set; }
-    public virtual TipoDesembolso TipoDesembolso1 { get; set; }
+    public virtual Ciclos Ciclos { get; set; }
 }
 
 public partial class Empleados
@@ -110,26 +133,10 @@ public partial class Estados
 public partial class Incidentes
 {
     public int ID { get; set; }
-    public int TipoIncidente { get; set; }
+    public int Ciclo { get; set; }
     public string detalle { get; set; }
 
-    public virtual TipoIncidente TipoIncidente1 { get; set; }
-}
-
-public partial class Materias
-{
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Materias()
-    {
-        this.Notas = new HashSet<Notas>();
-    }
-
-    public int ID { get; set; }
-    public string nombre_materia { get; set; }
-    public int uv_materia { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    public virtual ICollection<Notas> Notas { get; set; }
+    public virtual Ciclos Ciclos { get; set; }
 }
 
 public partial class Niveles
@@ -150,24 +157,17 @@ public partial class Niveles
 public partial class Notas
 {
     public int ID { get; set; }
-    public int Materia { get; set; }
-    public decimal nota { get; set; }
+    public string nombre_materia { get; set; }
+    public Nullable<decimal> nota { get; set; }
+    public int uv_materia { get; set; }
     public int Ciclo { get; set; }
-    public string tercio_superior { get; set; }
-    public string Becario { get; set; }
+    public Nullable<byte> tercio_superior { get; set; }
 
-    public virtual Becarios Becarios { get; set; }
-    public virtual Materias Materias { get; set; }
+    public virtual Ciclos Ciclos { get; set; }
 }
 
 public partial class Presupuestos
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Presupuestos()
-    {
-        this.Desembolsos = new HashSet<Desembolsos>();
-    }
-
     public int ID { get; set; }
     public decimal libros { get; set; }
     public decimal colegiatura { get; set; }
@@ -176,11 +176,9 @@ public partial class Presupuestos
     public decimal aranceles { get; set; }
     public decimal seguro { get; set; }
     public decimal trabajo_graduacion { get; set; }
-    public string Becario { get; set; }
+    public int Datos_becario { get; set; }
 
-    public virtual Becarios Becarios { get; set; }
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    public virtual ICollection<Desembolsos> Desembolsos { get; set; }
+    public virtual DatosAcademicos DatosAcademicos { get; set; }
 }
 
 public partial class Programas
@@ -199,36 +197,11 @@ public partial class Programas
     public virtual ICollection<Becarios> Becarios { get; set; }
 }
 
-public partial class TipoDesembolso
-{
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public TipoDesembolso()
-    {
-        this.Desembolsos = new HashSet<Desembolsos>();
-    }
-
-    public int ID { get; set; }
-    public string tipo_desembolso { get; set; }
-    public string descripcion { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    public virtual ICollection<Desembolsos> Desembolsos { get; set; }
-}
-
 public partial class TipoIncidente
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public TipoIncidente()
-    {
-        this.Incidentes = new HashSet<Incidentes>();
-    }
-
     public int ID { get; set; }
     public string tipo_incidente { get; set; }
     public string descripcion { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    public virtual ICollection<Incidentes> Incidentes { get; set; }
 }
 
 public partial class TipoUsuarios
@@ -279,9 +252,9 @@ public partial class Usuarios
     public string direccion_be { get; set; }
     public string correo { get; set; }
     public System.DateTime fecha_nacimiento { get; set; }
+    public string contraseña { get; set; }
     public int TipoUsuarios { get; set; }
     public int Estado { get; set; }
-    public string contraseña { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
     public virtual ICollection<Becarios> Becarios { get; set; }

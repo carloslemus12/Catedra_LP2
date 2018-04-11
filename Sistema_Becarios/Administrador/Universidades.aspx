@@ -89,7 +89,7 @@
             </div>
         </nav>
 
-        <div class="container-fluid bg-dark d-flex justify-content-center">
+        <div class="container-fluid bg-danger d-flex justify-content-center">
             <div class="form-inline my-2">
                 <div class="form-group">
                     <asp:TextBox AutoPostBack="true" CssClass="form-control my-0" ID="txtNombreFiltro" Text="" runat="server" />

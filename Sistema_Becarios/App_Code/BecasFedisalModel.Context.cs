@@ -25,18 +25,17 @@ public partial class BecasFedisalEntities : DbContext
 
     public virtual DbSet<Becarios> Becarios { get; set; }
     public virtual DbSet<Carreras> Carreras { get; set; }
+    public virtual DbSet<Ciclos> Ciclos { get; set; }
     public virtual DbSet<Datos_Beca> Datos_Beca { get; set; }
     public virtual DbSet<DatosAcademicos> DatosAcademicos { get; set; }
     public virtual DbSet<Desembolsos> Desembolsos { get; set; }
     public virtual DbSet<Empleados> Empleados { get; set; }
     public virtual DbSet<Estados> Estados { get; set; }
     public virtual DbSet<Incidentes> Incidentes { get; set; }
-    public virtual DbSet<Materias> Materias { get; set; }
     public virtual DbSet<Niveles> Niveles { get; set; }
     public virtual DbSet<Notas> Notas { get; set; }
     public virtual DbSet<Presupuestos> Presupuestos { get; set; }
     public virtual DbSet<Programas> Programas { get; set; }
-    public virtual DbSet<TipoDesembolso> TipoDesembolso { get; set; }
     public virtual DbSet<TipoIncidente> TipoIncidente { get; set; }
     public virtual DbSet<TipoUsuarios> TipoUsuarios { get; set; }
     public virtual DbSet<Universidades> Universidades { get; set; }

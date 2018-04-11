@@ -12,7 +12,7 @@
 </head>
 <body>
     <form id="form1" runat="server" class="h-100">
-    
+        <div id="_clientScript" runat="server"></div>
         <section class="container-fluid w-100 h-100 d-flex align-items-center justify-content-center">
 
             <div class="card card-login">
@@ -21,7 +21,13 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="txtPassword">Contraseña del usuario:</label>
+                        <label for="txtPasswordActual">Contraseña del usuario:</label>
+                        <asp:TextBox CssClass="form-control" ID="txtPasswordActual" runat="server" TextMode="Password" />
+                        <asp:RequiredFieldValidator ControlToValidate="txtPasswordActual" ErrorMessage="La clave del usuario es obligatorio" runat="server" Display="Dynamic" CssClass="text-danger" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtPassword">Contraseña nueva:</label>
                         <asp:TextBox CssClass="form-control" ID="txtPassword" runat="server" TextMode="Password" />
                         <asp:RequiredFieldValidator ControlToValidate="txtPassword" ErrorMessage="La clave del usuario es obligatorio" runat="server" Display="Dynamic" CssClass="text-danger" />
                     </div>

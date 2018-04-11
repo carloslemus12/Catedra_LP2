@@ -4,39 +4,37 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="725d186b524c4054a6040b5968a24b62" Name="Diagram1">
-        <EntityTypeShape EntityType="BecasFedisalModel.Becarios" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BecasFedisalModel.Carreras" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BecasFedisalModel.Datos_Beca" Width="1.5" PointX="2.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="BecasFedisalModel.DatosAcademicos" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BecasFedisalModel.Desembolsos" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BecasFedisalModel.Empleados" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="BecasFedisalModel.Estados" Width="1.5" PointX="4.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="BecasFedisalModel.Incidentes" Width="1.5" PointX="12" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BecasFedisalModel.Materias" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BecasFedisalModel.Niveles" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BecasFedisalModel.Notas" Width="1.5" PointX="7.5" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BecasFedisalModel.Presupuestos" Width="1.5" PointX="7.5" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BecasFedisalModel.Programas" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BecasFedisalModel.TipoDesembolso" Width="1.5" PointX="7.5" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="BecasFedisalModel.TipoIncidente" Width="1.5" PointX="9.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BecasFedisalModel.TipoUsuarios" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="BecasFedisalModel.Universidades" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="BecasFedisalModel.Usuarios" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
-        <AssociationConnector Association="BecasFedisalModel.FK__Becarios__codigo__30F848ED" ManuallyRouted="false" />
-        <AssociationConnector Association="BecasFedisalModel.FK__Becarios__DatosA__31EC6D26" ManuallyRouted="false" />
+      <Diagram DiagramId="8891b655e74b4045902f9016270ec7f1" Name="Diagram1">
+        <EntityTypeShape EntityType="BecasFedisalModel.Becarios" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BecasFedisalModel.Carreras" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BecasFedisalModel.Ciclos" Width="1.5" PointX="9.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BecasFedisalModel.Datos_Beca" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BecasFedisalModel.DatosAcademicos" Width="1.5" PointX="7.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BecasFedisalModel.Desembolsos" Width="1.5" PointX="12" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BecasFedisalModel.Empleados" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BecasFedisalModel.Estados" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BecasFedisalModel.Incidentes" Width="1.5" PointX="12" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BecasFedisalModel.Niveles" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BecasFedisalModel.Notas" Width="1.5" PointX="12" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BecasFedisalModel.Presupuestos" Width="1.5" PointX="9.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BecasFedisalModel.Programas" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BecasFedisalModel.TipoIncidente" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BecasFedisalModel.TipoUsuarios" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BecasFedisalModel.Universidades" Width="1.5" PointX="5.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BecasFedisalModel.Usuarios" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="BecasFedisalModel.FK__Becarios__codigo__31EC6D26" ManuallyRouted="false" />
         <AssociationConnector Association="BecasFedisalModel.FK__Becarios__Usuari__32E0915F" ManuallyRouted="false" />
-        <AssociationConnector Association="BecasFedisalModel.FK__Notas__Becario__3A81B327" ManuallyRouted="false" />
-        <AssociationConnector Association="BecasFedisalModel.FK__Presupues__Becar__3C69FB99" ManuallyRouted="false" />
-        <AssociationConnector Association="BecasFedisalModel.FK__DatosAcad__Carre__33D4B598" ManuallyRouted="false" />
-        <AssociationConnector Association="BecasFedisalModel.FK__DatosAcad__Nivel__34C8D9D1" ManuallyRouted="false" />
-        <AssociationConnector Association="BecasFedisalModel.FK__DatosAcad__Unive__35BCFE0A" ManuallyRouted="false" />
-        <AssociationConnector Association="BecasFedisalModel.FK__Desembols__Presu__36B12243" ManuallyRouted="false" />
-        <AssociationConnector Association="BecasFedisalModel.FK__Desembols__TipoD__37A5467C" ManuallyRouted="false" />
-        <AssociationConnector Association="BecasFedisalModel.FK__Empleados__Usuar__38996AB5" ManuallyRouted="false" />
-        <AssociationConnector Association="BecasFedisalModel.FK__Incidente__TipoI__398D8EEE" ManuallyRouted="false" />
-        <AssociationConnector Association="BecasFedisalModel.FK__Notas__Materia__3B75D760" ManuallyRouted="false" />
-        <AssociationConnector Association="BecasFedisalModel.FK__Usuarios__TipoUs__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="BecasFedisalModel.FK__DatosAcad__Becar__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="BecasFedisalModel.FK__DatosAcad__Carre__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="BecasFedisalModel.FK__Ciclos__Datos_be__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="BecasFedisalModel.FK__Desembols__Ciclo__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="BecasFedisalModel.FK__Incidente__Ciclo__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="BecasFedisalModel.FK__Notas__Ciclo__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="BecasFedisalModel.FK__DatosAcad__Nivel__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="BecasFedisalModel.FK__DatosAcad__Unive__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="BecasFedisalModel.FK__Presupues__Datos__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="BecasFedisalModel.FK__Empleados__Usuar__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="BecasFedisalModel.FK__Usuarios__TipoUs__3D5E1FD2" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

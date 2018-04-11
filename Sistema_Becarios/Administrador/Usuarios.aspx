@@ -110,7 +110,7 @@
             </div>
         </nav>
 
-        <div class="container-fluid bg-dark d-flex justify-content-center">
+        <div class="container-fluid bg-danger d-flex justify-content-center">
             <div class="form-inline my-2 w-50 d-flex justify-content-between">
 
                 <div class="form-group">
