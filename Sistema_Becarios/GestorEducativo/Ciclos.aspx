@@ -104,10 +104,6 @@ AND Desembolsos .Presupuesto = @presupuesto" >
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
-                    <div class="card-footer bg-danger">
-                        <button type="button" class="btn btn-danger w-100" data-toggle="modal" data-target="#modal_nueva_materia">
-                            Añadir nueva materiar nueva materia</button>
-                    </div>
                 </div>
             </div>
             <div class="col-sm-12 col-md">
@@ -126,40 +122,89 @@ AND Desembolsos .Presupuesto = @presupuesto" >
                                 Dui: <cite title="Source Title"><%= becario.Usuarios.dui %></cite>
                                 Email: <cite title="Source Title"><%= becario.Usuarios.correo %></cite>
                             </footer>
-                            <table class="table table-dark table-hover text-center mb-0" style="font-size: 15px;">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" class="bg-danger">Tipo</th>
-                                        <th scope="col">Presupuesto</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                        <th scope="row" class="bg-danger">Matricula</th>
-                                        <td><%= "" + matricula + "$" %></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" class="bg-danger">Manuntencion</th>
-                                        <td><%= "" + manuntencion + "$" %></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" class="bg-danger">Libro</th>
-                                        <td><%= "" + libros + "$" %></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" class="bg-danger">Araceles</th>
-                                        <td><%= "" + aranceles + "$" %></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" class="bg-danger">Graduacion</th>
-                                        <td><%= "" + graduacion + "$" %></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" class="bg-danger">Seguro</th>
-                                        <td><%= "" + seguro + "$" %></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+
+                            <div class="list-group">
+                                <button type="button" class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Presupuesto original</button>
+                                <div class="collapse" id="collapseExample">
+                                    <div class="card card-body">
+                                        <table class="table table-dark table-hover text-center mb-0" style="font-size: 15px;">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" class="bg-danger">Tipo</th>
+                                                    <th scope="col">Presupuesto</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr>
+                                                    <th scope="row" class="bg-danger">Matricula</th>
+                                                    <td><%= "" + matricula + "$" %></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="bg-danger">Manuntencion</th>
+                                                    <td><%= "" + manuntencion + "$" %></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="bg-danger">Libro</th>
+                                                    <td><%= "" + libros + "$" %></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="bg-danger">Araceles</th>
+                                                    <td><%= "" + aranceles + "$" %></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="bg-danger">Graduacion</th>
+                                                    <td><%= "" + graduacion + "$" %></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="bg-danger">Seguro</th>
+                                                    <td><%= "" + seguro + "$" %></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#item_table" aria-expanded="false" aria-controls="item_table">Presupuesto actual</button>
+                                <div class="collapse" id="item_table">
+                                    <div class="card card-body">
+                                        <table class="table table-dark table-hover text-center mb-0" style="font-size: 15px;">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" class="bg-danger">Tipo</th>
+                                                    <th scope="col">Presupuesto</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr>
+                                                    <th scope="row" class="bg-danger">Matricula</th>
+                                                    <td><%= "" + presupuesto.matricula + "$" %></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="bg-danger">Manuntencion</th>
+                                                    <td><%= "" + presupuesto.manutencion + "$" %></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="bg-danger">Libro</th>
+                                                    <td><%= "" + presupuesto.libros + "$" %></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="bg-danger">Araceles</th>
+                                                    <td><%= "" + presupuesto.aranceles + "$" %></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="bg-danger">Graduacion</th>
+                                                    <td><%= "" + presupuesto.trabajo_graduacion + "$" %></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="bg-danger">Seguro</th>
+                                                    <td><%= "" + presupuesto.seguro + "$" %></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
                         </blockquote>
                     </div>
                 </div>
@@ -175,21 +220,16 @@ AND Desembolsos .Presupuesto = @presupuesto" >
                     <div class="card-body p-0">
                         <asp:UpdatePanel ID="up_desembolso" runat="server">
                             <ContentTemplate>
-                                <asp:GridView BorderColor="White" CssClass="table table-hover table-bordered w-100 my-0" ID="tbl_desembolsos" runat="server" AutoGenerateColumns="False" DataSourceID="sql_desembolso" DataKeyNames="ID" OnSelectedIndexChanged="tbl_desembolsos_SelectedIndexChanged">
+                                <asp:GridView BorderColor="White" CssClass="table table-hover table-bordered w-100 my-0" ID="tbl_desembolsos" runat="server" AutoGenerateColumns="False" DataSourceID="sql_desembolso" DataKeyNames="ID">
                                     <Columns>
                                         <asp:BoundField DataField="ID" HeaderText="ID" SortExpression="ID" InsertVisible="False" ReadOnly="True" Visible="False" />
                                         <asp:BoundField DataField="TipoDesembolso" HeaderText="Tipo" SortExpression="TipoDesembolso" />
                                         <asp:BoundField DataField="monto_desembolso" HeaderText="Cantidad" ReadOnly="True" SortExpression="monto_desembolso" />
                                         <asp:BoundField DataField="fecha_desembolso" HeaderText="Fecha" SortExpression="fecha_desembolso" />
-                                        <asp:CommandField ButtonType="Image" HeaderText="Devolver" SelectImageUrl="~/img/money-back.png" ShowSelectButton="True" />
                                     </Columns>
                                 </asp:GridView>
                             </ContentTemplate>
                         </asp:UpdatePanel>
-                    </div>
-                    <div class="card-footer bg-secondary p-0">
-                        <button type="button" class="btn btn-secondary w-100" data-toggle="modal" data-target="#modal_desembolsar">
-                            Desembolsar</button>
                     </div>
                 </div>
             </div>
@@ -249,85 +289,12 @@ AND Desembolsos .Presupuesto = @presupuesto" >
 
     <!-- //////////////////////////////////////////////////////////////////////////// -->
 
-    <div class="modal fade" id="modal_desembolsar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-dark text-white">
-                    <h5 class="modal-title">Desembolsar:</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="text-white">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="ddl_tipo">Tipo de desembolso:</label>
-                        <asp:DropDownList CssClass="form-control" ID="ddl_tipo" runat="server" ClientIDMode="Static">
-                            <asp:ListItem Text="Trabajo de graduacion" Value="Trabajo de graduacion" />
-                            <asp:ListItem Text="Araceles" Value="Araceles" />
-                            <asp:ListItem Text="Libros" Value="Libros" />
-                            <asp:ListItem Text="Manuntencion" Value="Manuntencion" />
-                            <asp:ListItem Text="Matricula" Value="Matricula" />
-                            <asp:ListItem Text="Seguro" Value="Seguro" />
-                        </asp:DropDownList>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="txtDesembolso">Cantidad a desembolsar:</label>
-                        <asp:TextBox ID="txtDesembolso" Text="1" ValidationGroup="desembolsar" type="number" runat="server" CssClass="form-control" placeholder="Cantdad a desembolsar" min="0" step="0.01" ClientIDMode="Static" />
-                        <asp:RequiredFieldValidator ControlToValidate="txtDesembolso" ValidationGroup="desembolsar" Display="Dynamic" runat="server" ErrorMessage="El desemolso es obligatorio" CssClass="blockquote-footer text-danger"/>
-                        <asp:CompareValidator ControlToValidate="txtDesembolso" ValidationGroup="desembolsar" Display="Dynamic" runat="server" ErrorMessage="El desembolso debe de ser mayor que 0" ValueToCompare="0" Operator="GreaterThanEqual" CssClass="blockquote-footer text-danger" />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <asp:Button ID="btn_desembolsar" runat="server" CssClass="btn btn-primary" Text="Desembolsar" OnClick="btn_desembolsar_Click" />
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div id="_clientScript" runat="server"></div>
 
     <!-- /////////////////////////////////////////////////////////////////////////// -->
 
         <!-- Modal de las materias -->
-        <div class="modal fade" id="modal_nueva_materia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="txtNuevoNombreMateria">Materia:</label>
-                            <asp:TextBox ClientIDMode="Static" ID="txtNuevoNombreMateria" ValidationGroup="nuevaMateria" runat="server" CssClass="form-control" placeholder="Nombre de usuario" />
-                            <asp:RequiredFieldValidator ControlToValidate="txtNuevoNombreMateria" ValidationGroup="nuevaMateria" Display="Dynamic" runat="server" ErrorMessage="El nombre del usuario es obligatorio" CssClass="blockquote-footer text-danger"/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="txtNuevaNota">Nota de la materia:</label>
-                            <asp:TextBox ID="txtNuevaNota" Text="0" ValidationGroup="nuevaMateria" type="number" runat="server" CssClass="form-control" placeholder="Nota de la materia" min="0" step="0.01" max="10" ClientIDMode="Static" />
-                            <asp:RequiredFieldValidator ControlToValidate="txtNuevaNota" ValidationGroup="nuevaMateria" Display="Dynamic" runat="server" ErrorMessage="La nota es obligatoria" CssClass="blockquote-footer text-danger"/>
-                            <asp:CompareValidator ControlToValidate="txtNuevaNota" ValidationGroup="nuevaMateria" Display="Dynamic" runat="server" ErrorMessage="La nota debe de ser mayor que 0" ValueToCompare="0" Operator="GreaterThanEqual" CssClass="blockquote-footer text-danger" />
-                            <asp:CompareValidator ControlToValidate="txtNuevaNota" ValidationGroup="nuevaMateria" Display="Dynamic" runat="server" ErrorMessage="La nota debe de ser menor que 10" Type="Double" ValueToCompare="10" Operator="LessThanEqual" CssClass="blockquote-footer text-danger" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="txtNuevoUv">UV de la materia:</label>
-                            <asp:TextBox ID="txtNuevoUv" ClientIDMode="Static" Text="1" ValidationGroup="nuevaMateria" type="number" runat="server" CssClass="form-control" placeholder="UVS" min="1" max="5"/>
-                            <asp:RequiredFieldValidator ControlToValidate="txtNuevoUv" ValidationGroup="nuevaMateria" Display="Dynamic" runat="server" ErrorMessage="El UV es obligatoria" CssClass="blockquote-footer text-danger"/>
-                            <asp:CompareValidator ControlToValidate="txtNuevoUv" ValidationGroup="nuevaMateria" Display="Dynamic" runat="server" ErrorMessage="El UV debe de ser mayor que 1" ValueToCompare="1" Operator="GreaterThanEqual" CssClass="blockquote-footer text-danger" />
-                            <asp:CompareValidator ControlToValidate="txtNuevoUv" ValidationGroup="nuevaMateria" Display="Dynamic" runat="server" ErrorMessage="El UV debe de ser menor que 5" ValueToCompare="5" Operator="LessThanEqual" CssClass="blockquote-footer text-danger" />
-                        </div>
-                    </div>
-                    <div class="modal-footer"> 
-                        <asp:Button ID="btn_nuevaMateria" runat="server" ValidationGroup="nuevaMateria" CssClass="btn btn-primary" Text="Añadir materia" OnClick="btn_nuevaMateria_Click" />
-                    </div>
-                </div>
-            </div>
-        </div>
+        
     <!-- /////////////////////////////////////////////////////////////////////////// -->
     <asp:TextBox ID="txtModId" runat="server" type="hidden" ClientIDMode="Static" />
     <div class="modal fade" id="modal_modificar_materia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -349,7 +316,7 @@ AND Desembolsos .Presupuesto = @presupuesto" >
                         <div class="form-group">
                             <label for="txtModificarNota">Nota de la materia:</label>
                             <asp:TextBox ID="txtModificarNota" Text="0" ClientIDMode="Static" ValidationGroup="modificarMateria" type="number" runat="server" CssClass="form-control" placeholder="Nota de la materia" min="0" step="0.01" max="10" />
-                            <asp:RequiredFieldValidator ControlToValidate="txtNuevaNota" ValidationGroup="modificarMateria" Display="Dynamic" runat="server" ErrorMessage="La nota es obligatoria" CssClass="blockquote-footer text-danger"/>
+                            <asp:RequiredFieldValidator ControlToValidate="txtModificarNota" ValidationGroup="modificarMateria" Display="Dynamic" runat="server" ErrorMessage="La nota es obligatoria" CssClass="blockquote-footer text-danger"/>
                             <asp:CompareValidator ControlToValidate="txtModificarNota" ValidationGroup="modificarMateria" Display="Dynamic" runat="server" ErrorMessage="La nota debe de ser mayor que 0" ValueToCompare="0" Operator="GreaterThanEqual" CssClass="blockquote-footer text-danger" />
                             <asp:CompareValidator ControlToValidate="txtModificarNota" ValidationGroup="modificarMateria" Display="Dynamic" runat="server" ErrorMessage="La nota debe de ser menor que 10" Type="Double" ValueToCompare="10" Operator="LessThanEqual" CssClass="blockquote-footer text-danger" />
                         </div>

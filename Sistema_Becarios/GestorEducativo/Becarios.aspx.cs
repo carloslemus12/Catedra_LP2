@@ -86,23 +86,6 @@ public partial class GestorEducativo_Becarios : System.Web.UI.Page
                 this.scr_manager.RegisterDataItem(this.txtFechaFinalizacion, datos_academicos.fecha_finalizacion.ToString("yyyy-MM-dd"));
             }
         }
-        else if (txtAccion.Text.Trim().Equals("3"))
-        {
-            this.scr_manager.RegisterDataItem(this.txtModId, "" + becario.ID);
-            DatosAcademicos datos_academicos;
-            Presupuestos presupuesto;
-
-            if ((datos_academicos = becario.DatosAcademicos.LastOrDefault()) != null && (presupuesto = datos_academicos.Presupuestos.LastOrDefault()) != null)
-            {
-                this.scr_manager.RegisterDataItem(this.txtMontoAracele, "" + presupuesto.trabajo_graduacion);
-                this.scr_manager.RegisterDataItem(this.txtMontoGraduacion, "" + presupuesto.aranceles);
-                this.scr_manager.RegisterDataItem(this.txtMontoLibro, "" + presupuesto.libros);
-                this.scr_manager.RegisterDataItem(this.txtMontoManutencion, "" + presupuesto.manutencion);
-                this.scr_manager.RegisterDataItem(this.txtMontoMatricula, "" + presupuesto.matricula);
-                this.scr_manager.RegisterDataItem(this.txtMontoSeguro, "" + presupuesto.seguro);
-            }
-
-        }
         else
         {
             DatosAcademicos datos_academicos;
@@ -162,6 +145,7 @@ public partial class GestorEducativo_Becarios : System.Web.UI.Page
         {
             BecariosModelo becas_modelo = new BecariosModelo();
             becas_modelo.guardarDatos(becario, universidad, carrera, nivel, fecha_inicio, fecha_salida);
+            agregarPresupuesto();
         }
         else
         {
@@ -173,7 +157,7 @@ public partial class GestorEducativo_Becarios : System.Web.UI.Page
     }
 
 
-    protected void btn_ActualizarPresupuesto_Click(object sender, EventArgs e)
+    protected void agregarPresupuesto()
     {
         Becarios becario = BecariosModelo.Encontrar(int.Parse(this.txtModId.Text.Trim()));
         DatosAcademicos datos_academicos = becario.DatosAcademicos.LastOrDefault();
@@ -182,51 +166,39 @@ public partial class GestorEducativo_Becarios : System.Web.UI.Page
         {
             Presupuestos presupuesto;
 
-            double graduacion = double.Parse(this.txtMontoGraduacion.Text.Trim().Replace(',', '.'));
-            double aracele = double.Parse(this.txtMontoAracele.Text.Trim().Replace(',', '.'));
-            double libro = double.Parse(this.txtMontoLibro.Text.Trim().Replace(',', '.'));
-            double manuntencio = double.Parse(this.txtMontoManutencion.Text.Trim().Replace(',', '.'));
-            double matricula = double.Parse(this.txtMontoMatricula.Text.Trim().Replace(',', '.'));
-            double seguro = double.Parse(this.txtMontoSeguro.Text.Trim().Replace(',', '.'));
+            double graduacion = 0.0;
+            double aracele = 0.0;
+            double libro = 0.0;
+            double manuntencio = 0.0;
+            double matricula = 0.0;
+            double seguro = 0.0;
 
             if ((presupuesto = datos_academicos.Presupuestos.LastOrDefault()) == null)
             {
                 BecariosModelo becario_modelo = new BecariosModelo();
                 becario_modelo.guardarPresupuesto(datos_academicos, graduacion, aracele, libro, manuntencio, matricula, seguro);
             }
-            else {
-                BecariosModelo becario_modelo = new BecariosModelo();
-                becario_modelo.actualizarPresupuesto(presupuesto, graduacion, aracele, libro, manuntencio, matricula, seguro);
-            }
-        } else
-            this._clientScript.InnerHtml = "<script>alert('Error: no hay registros del becario');</script>";
-
-        this.up_content.DataBind();
+        }
     }
 
     protected void tbl_becarios_RowCreated(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.Header)
         {
-            e.Row.Cells[6].ColumnSpan = 4;
-            e.Row.Cells.RemoveAt(7);
+            e.Row.Cells[6].ColumnSpan = 3;
             e.Row.Cells.RemoveAt(7);
             e.Row.Cells.RemoveAt(7);
         }
         else if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            Image ciclos = (Image)e.Row.Cells[9].Controls[0];
-            Image peresupuesto = (Image)e.Row.Cells[8].Controls[0];
+            Image ciclos = (Image)e.Row.Cells[8].Controls[0];
             Image datos = (Image)e.Row.Cells[7].Controls[0];
             Image modificar = (Image)e.Row.Cells[6].Controls[0];
 
-            ciclos.Attributes.Add("onClick", "$('#txtAccion').val('4').change();");
-            peresupuesto.Attributes.Add("onClick", "$('#txtAccion').val('3').change();");
+            ciclos.Attributes.Add("onClick", "$('#txtAccion').val('4').change();");            
             datos.Attributes.Add("onClick", "$('#txtAccion').val('2').change();");
             modificar.Attributes.Add("onClick", "$('#txtAccion').val('1').change();");
 
-            peresupuesto.Attributes.Add("data-toggle", "modal");
-            peresupuesto.Attributes.Add("data-target", "#manejo_presupuesto");
 
             modificar.Attributes.Add("data-toggle", "modal");
             modificar.Attributes.Add("data-target", "#modal_modificar_becario");

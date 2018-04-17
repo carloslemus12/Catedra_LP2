@@ -16,13 +16,15 @@ public partial class Contador_becario : System.Web.UI.Page
     public decimal graduacion = 0;
     public decimal seguro = 0;
 
-    Presupuestos presupuesto;
+    public Presupuestos presupuesto;
+    public DatosAcademicos registro;
 
     protected void Page_Load(object sender, EventArgs e)
     {
         int id = int.Parse(RouteData.Values["becario"].ToString());
         becario = BecariosModelo.Encontrar(id);
 
+        registro = becario.DatosAcademicos.Last();
         presupuesto = becario.DatosAcademicos.Last().Presupuestos.Last();
 
         this.txt_datos.Text = becario.DatosAcademicos.Last().ID.ToString();

@@ -11,6 +11,13 @@ public partial class Contador_Becario_ciclo : System.Web.UI.Page
     public Ciclos ciclo;
     public Presupuestos presupuesto;
 
+    public decimal matricula = 0;
+    public decimal manuntencion = 0;
+    public decimal libros = 0;
+    public decimal aranceles = 0;
+    public decimal graduacion = 0;
+    public decimal seguro = 0;
+
     protected void Page_Load(object sender, EventArgs e)
     {
         int id = int.Parse(RouteData.Values["becario"].ToString());
@@ -19,6 +26,17 @@ public partial class Contador_Becario_ciclo : System.Web.UI.Page
         becario = BecariosModelo.Encontrar(id);
         ciclo = BecariosModelo.encontrarCiclo(id_ciclo);
         presupuesto = becario.DatosAcademicos.Last().Presupuestos.Last();
+
+        // Obtenemos los datos del presupuesto global
+        var desembolos = BecariosModelo.obtenerTotalDesembolsado(presupuesto.ID);
+
+        // Total del dinero
+        matricula = presupuesto.matricula + desembolos.Matricula;
+        manuntencion = presupuesto.manutencion + desembolos.Manuntencion;
+        libros = presupuesto.libros + desembolos.Libro;
+        aranceles = presupuesto.aranceles + desembolos.Araceles;
+        graduacion = presupuesto.trabajo_graduacion + desembolos.Graduacion;
+        seguro = presupuesto.seguro + desembolos.Seguro;
 
         this.txt_presupuesto.Text = "" + presupuesto.ID;
         this.txt_datos.Text = "" + becario.DatosAcademicos.Last().ID;

@@ -25,6 +25,9 @@ public partial class _Default : System.Web.UI.Page
             {
                 Response.Redirect("/GestorEducativo/Becarios");
             }
+            else if (usuario.TipoUsuarios == 4) {
+                Response.Redirect("/Becario/index.aspx");
+            }
         }
     }
 
@@ -48,6 +51,8 @@ public partial class _Default : System.Web.UI.Page
                 Response.Redirect("/Contador/Becarios");
             if (usuario.TipoUsuarios == 2)
                 Response.Redirect("/GestorEducativo/Becarios");
+            if (usuario.TipoUsuarios == 4)
+                Response.Redirect("/Becario/index.aspx");
 
         } else {
             this.divMsg.Attributes.Add("class", "alert alert-danger alert-dismissible fade show mb-0");

@@ -55,6 +55,89 @@ Ciclo del becario
                             </div>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        <div class="list-group">
+                            <button type="button" class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Presupuesto original</button>
+                            <div class="collapse" id="collapseExample">
+                                <div class="card card-body">
+                                    <table class="table table-dark table-hover text-center mb-0" style="font-size: 15px;">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="bg-danger">Tipo</th>
+                                                <th scope="col">Presupuesto</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <th scope="row" class="bg-danger">Matricula</th>
+                                                <td><%= "" + matricula + "$" %></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" class="bg-danger">Manuntencion</th>
+                                                <td><%= "" + manuntencion + "$" %></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" class="bg-danger">Libro</th>
+                                                <td><%= "" + libros + "$" %></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" class="bg-danger">Araceles</th>
+                                                <td><%= "" + aranceles + "$" %></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" class="bg-danger">Graduacion</th>
+                                                <td><%= "" + graduacion + "$" %></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" class="bg-danger">Seguro</th>
+                                                <td><%= "" + seguro + "$" %></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <button type="button" class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#item_table" aria-expanded="false" aria-controls="item_table">Presupuesto actual</button>
+                            <div class="collapse" id="item_table">
+                                <div class="card card-body">
+                                    <table class="table table-dark table-hover text-center mb-0" style="font-size: 15px;">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="bg-danger">Tipo</th>
+                                                <th scope="col">Presupuesto</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <th scope="row" class="bg-danger">Matricula</th>
+                                                <td><%= "" + presupuesto.matricula + "$" %></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" class="bg-danger">Manuntencion</th>
+                                                <td><%= "" + presupuesto.manutencion + "$" %></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" class="bg-danger">Libro</th>
+                                                <td><%= "" + presupuesto.libros + "$" %></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" class="bg-danger">Araceles</th>
+                                                <td><%= "" + presupuesto.aranceles + "$" %></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" class="bg-danger">Graduacion</th>
+                                                <td><%= "" + presupuesto.trabajo_graduacion + "$" %></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" class="bg-danger">Seguro</th>
+                                                <td><%= "" + presupuesto.seguro + "$" %></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -145,7 +228,7 @@ Ciclo del becario
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <asp:Button ID="btn_desembolsar" runat="server" CssClass="btn btn-primary" Text="Desembolsar" OnClick="btn_desembolsar_Click" />
+                            <asp:Button ID="btn_desembolsar" runat="server" CssClass="btn btn-primary " Text="Desembolsar" OnClick="btn_desembolsar_Click" />
                         </div>
                     </div>
                 </div>
@@ -167,7 +250,7 @@ Ciclo del becario
                 </div>
                 <asp:ScriptManager ID="scr_manager" runat="server"></asp:ScriptManager>
                 <div class="row mt-md-2 mb-5">
-                    <div class="card bg-primary text-white col">
+                    <div class="card bg-primary text-white col mb-0">
                         <div class="card-body">
                             <h5 class="card-title">Reguistro de desembolso:</h5>
                             <hr class="bg-white text-white border-white my-0" />
@@ -186,8 +269,8 @@ Ciclo del becario
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
-                            <div class="card-footer pb-0">
-                                <button type="button" class="btn btn-warning text-white w-100 mb-0" data-toggle="modal" data-target="#modal_desembolsar">Añadir incidencia</button>
+                            <div class="card-footer p-0">
+                                <button type="button" class="btn btn-primary text-white w-100 mb-0 m-0" data-toggle="modal" data-target="#modal_desembolsar">Desembolsar</button>
                             </div>
                         </div>
                     </div>

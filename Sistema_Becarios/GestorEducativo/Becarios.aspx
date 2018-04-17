@@ -135,7 +135,6 @@
                         <asp:BoundField DataField="Column2" HeaderText="Estado" ReadOnly="True" SortExpression="Column2" />
                         <asp:CommandField ButtonType="Image" HeaderText="Opciones" SelectImageUrl="~/img/edit.png" ShowSelectButton="True" />
                         <asp:CommandField ButtonType="Image" SelectImageUrl="~/img/note.png" ShowSelectButton="True" />
-                        <asp:CommandField ButtonType="Image" SelectImageUrl="~/img/credit-card.png" ShowSelectButton="True" />
                         <asp:CommandField ButtonType="Image" SelectImageUrl="~/img/office-material.png" ShowSelectButton="True" />
                     </Columns>
                 </asp:GridView>
@@ -366,69 +365,6 @@
                 </div>
                 <div class="modal-footer">
                     <asp:Button ID="btn_ActualizarDatosAcademido" ValidationGroup="datosAcademico" runat="server" CssClass="btn btn-primary" Text="Actualizar datos" ClientIDMode="Static" OnClick="btn_ActualizarDatosAcademido_Click" />
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ////////////////////////////////////////////////////////////////////////////////////// -->
-
-    <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
-
-    <div class="modal fade" id="manejo_presupuesto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-warning text-white">
-                    <h5 class="modal-title">Presupuesto</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="txtMontoLibro">Monto del libro:</label>
-                        <asp:TextBox ID="txtMontoLibro" Text="0" ValidationGroup="presupuesto" type="number" runat="server" CssClass="form-control" placeholder="Monto del libro" min="0" step="0.01" ClientIDMode="Static" />
-                        <asp:RequiredFieldValidator ControlToValidate="txtMontoLibro" ValidationGroup="presupuesto" Display="Dynamic" runat="server" ErrorMessage="El monto del libro es obligatoria" CssClass="blockquote-footer text-danger"/>
-                        <asp:CompareValidator ControlToValidate="txtMontoLibro" ValidationGroup="presupuesto" Display="Dynamic" runat="server" ErrorMessage="El monto del libro debe de ser mayor que 0" ValueToCompare="0" Operator="GreaterThanEqual" CssClass="blockquote-footer text-danger" />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="txtMontoManutencion">Monto de manutencion:</label>
-                        <asp:TextBox ID="txtMontoManutencion" Text="0" ValidationGroup="presupuesto" type="number" runat="server" CssClass="form-control" placeholder="Monto de la manuntencion" min="0" step="0.01" ClientIDMode="Static" />
-                        <asp:RequiredFieldValidator ControlToValidate="txtMontoManutencion" ValidationGroup="presupuesto" Display="Dynamic" runat="server" ErrorMessage="El monto de la manuntencion es obligatoria" CssClass="blockquote-footer text-danger"/>
-                        <asp:CompareValidator ControlToValidate="txtMontoManutencion" ValidationGroup="presupuesto" Display="Dynamic" runat="server" ErrorMessage="El monto de la manuntencion debe de ser mayor que 0" ValueToCompare="0" Operator="GreaterThanEqual" CssClass="blockquote-footer text-danger" />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="txtMontoMatricula">Monto de la matricula:</label>
-                        <asp:TextBox ID="txtMontoMatricula" Text="0" ValidationGroup="presupuesto" type="number" runat="server" CssClass="form-control" placeholder="Monto de la matricula" min="0" step="0.01" ClientIDMode="Static" />
-                        <asp:RequiredFieldValidator ControlToValidate="txtMontoMatricula" ValidationGroup="presupuesto" Display="Dynamic" runat="server" ErrorMessage="El monto de la matricula es obligatoria" CssClass="blockquote-footer text-danger"/>
-                        <asp:CompareValidator ControlToValidate="txtMontoMatricula" ValidationGroup="presupuesto" Display="Dynamic" runat="server" ErrorMessage="El monto de la matricula debe de ser mayor que 0" ValueToCompare="0" Operator="GreaterThanEqual" CssClass="blockquote-footer text-danger" />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="txtMontoAracele">Monto de los araceles:</label>
-                        <asp:TextBox ID="txtMontoAracele" Text="0" ValidationGroup="presupuesto" type="number" runat="server" CssClass="form-control" placeholder="Monto de los araceles" min="0" step="0.01" ClientIDMode="Static" />
-                        <asp:RequiredFieldValidator ControlToValidate="txtMontoAracele" ValidationGroup="presupuesto" Display="Dynamic" runat="server" ErrorMessage="El monto de los araceles es obligatoria" CssClass="blockquote-footer text-danger"/>
-                        <asp:CompareValidator ControlToValidate="txtMontoAracele" ValidationGroup="presupuesto" Display="Dynamic" runat="server" ErrorMessage="El monto de los araceles debe de ser mayor que 0" ValueToCompare="0" Operator="GreaterThanEqual" CssClass="blockquote-footer text-danger" />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="txtMontoSeguro">Monto del seguro:</label>
-                        <asp:TextBox ID="txtMontoSeguro" Text="0" ValidationGroup="presupuesto" type="number" runat="server" CssClass="form-control" placeholder="Monto del seguro" min="0" step="0.01" ClientIDMode="Static" />
-                        <asp:RequiredFieldValidator ControlToValidate="txtMontoSeguro" ValidationGroup="presupuesto" Display="Dynamic" runat="server" ErrorMessage="El monto del seguro es obligatoria" CssClass="blockquote-footer text-danger"/>
-                        <asp:CompareValidator ControlToValidate="txtMontoSeguro" ValidationGroup="presupuesto" Display="Dynamic" runat="server" ErrorMessage="El monto del seguro debe de ser mayor que 0" ValueToCompare="0" Operator="GreaterThanEqual" CssClass="blockquote-footer text-danger" />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="txtMontoGraduacion">Monto de graduacion:</label>
-                        <asp:TextBox ID="txtMontoGraduacion" Text="0" ValidationGroup="presupuesto" type="number" runat="server" CssClass="form-control" placeholder="Monto de graduacion" min="0" step="0.01" ClientIDMode="Static" />
-                        <asp:RequiredFieldValidator ControlToValidate="txtMontoGraduacion" ValidationGroup="presupuesto" Display="Dynamic" runat="server" ErrorMessage="El monto de graduacion es obligatoria" CssClass="blockquote-footer text-danger"/>
-                        <asp:CompareValidator ControlToValidate="txtMontoGraduacion" ValidationGroup="presupuesto" Display="Dynamic" runat="server" ErrorMessage="El monto de graduacion debe de ser mayor que 0" ValueToCompare="0" Operator="GreaterThanEqual" CssClass="blockquote-footer text-danger" />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <asp:Button ID="btn_ActualizarPresupuesto" ValidationGroup="presupuesto" runat="server" CssClass="btn btn-primary" Text="Actualizar datos" ClientIDMode="Static" OnClick="btn_ActualizarPresupuesto_Click" />
                 </div>
             </div>
         </div>

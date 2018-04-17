@@ -48,10 +48,8 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Informacion del programa de becas</h5>
                                     <h6 class="card-subtitle mb-2 text-muted">Programa de beca.</h6>
-                                    <p class="card-text my-0"><span class="font-weight-bold">Fecha de inicio de la beca:</span></p>
-                                    <p class="card-text my-0"><span class="font-weight-bold">Fecha de fin de la beca:</span></p>
-                                    <p class="card-text my-0"><span class="font-weight-bold">Fecha de inicio del curso:</span></p>
-                                    <p class="card-text my-0"><span class="font-weight-bold">Fecha de fin del curso:</span></p>
+                                    <p class="card-text my-0"><span class="font-weight-bold">Fecha de inicio de la beca:</span> <%= registro.fecha_inicio.ToString("yyyy-MM-dd") %></p>
+                                    <p class="card-text my-0"><span class="font-weight-bold">Fecha de fin de la beca:</span> <%= registro.fecha_finalizacion.ToString("yyyy-MM-dd") %></p>
                                 </div>
                             </div>
                         </div>

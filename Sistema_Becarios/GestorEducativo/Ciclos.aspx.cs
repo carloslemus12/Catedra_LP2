@@ -59,16 +59,6 @@ public partial class GestorEducativo_Ciclos : System.Web.UI.Page
         }
     }
 
-    protected void btn_nuevaMateria_Click(object sender, EventArgs e)
-    {
-        string materia = this.txtNuevoNombreMateria.Text.Trim();
-        double nota = double.Parse(this.txtNuevaNota.Text.Trim());
-        int uv = int.Parse(this.txtNuevoUv.Text.Trim());
-
-        BecariosModelo.guardarMateria(int.Parse(this.ddl_ciclos.SelectedValue), materia, nota, uv);
-        this.up_materias.DataBind();
-    }
-
     protected void tbl_materias_RowCreated(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
@@ -121,27 +111,6 @@ public partial class GestorEducativo_Ciclos : System.Web.UI.Page
         Notas notas = BecariosModelo.encontrarNota(int.Parse(txtModId.Text.Trim()));
         BecariosModelo.eliminarrMateria(notas);
         this.up_materias.DataBind();
-    }
-
-    protected void btn_desembolsar_Click(object sender, EventArgs e)
-    {
-        int id_ciclo = int.Parse(this.ddl_ciclos.SelectedValue);
-        double monto = double.Parse(this.txtDesembolso.Text.Trim());
-        string tipo_desembolso = this.ddl_tipo.SelectedValue;
-
-        if (!BecariosModelo.agregarDesembolso(presupuesto, id_ciclo, tipo_desembolso, monto))
-            this._clientScript.InnerHtml = "<script>alert('Error: El monto es superior a los ingresos que posee');</script>";
-
-        this.up_desembolso.DataBind();
-    }
-
-    protected void tbl_desembolsos_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        int id_desembolso = int.Parse(this.tbl_desembolsos.SelectedValue.ToString());
-
-        BecariosModelo.devolverDinero(presupuesto, id_desembolso);
-
-        this.up_desembolso.DataBind();
     }
 
     protected void btn_incidencia_Click(object sender, EventArgs e)

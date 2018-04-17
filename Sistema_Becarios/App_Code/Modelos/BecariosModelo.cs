@@ -264,7 +264,7 @@ public class BecariosModelo
     public static bool esElUltimoCiclo(DatosAcademicos datos, int id_ciclo)
     {
         Ciclos utilmoCiclo = datos.Ciclos.LastOrDefault();
-        return utilmoCiclo.ID == id_ciclo;
+        return (utilmoCiclo == null && utilmoCiclo.ID == id_ciclo);
     }
 
     public void GuardarBecario(string nombre, string apellido, string telefono, string direccion, string correo, string fecha, string clave, string cod_beca, string dui = null) {
